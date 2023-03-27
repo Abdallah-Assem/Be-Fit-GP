@@ -30,15 +30,15 @@ namespace BeFit_API.Controllers
 
             userMacros.IsActive = true;
             userMacros.Id= Guid.NewGuid(); 
-            //Calculate BMR
+            //Calculate BMR (Mifflin-St Jeor)
             double BMR = 0;
             double TDEE = 0;
             if (userMacros.Gender == "Male")
             {
-                BMR = (double)(88.36 + (13.4 * userMacros.Weight) + (4.8 * userMacros.Height) - (5.7 * userMacros.Age));
+                BMR = (double)(5 + (10 * userMacros.Weight) + (6.25 * userMacros.Height) - (5 * userMacros.Age));
             } else
             {
-                BMR = (double)(447.6 + (9.2 * userMacros.Weight) + (3.1 * userMacros.Height) - (4.3 * userMacros.Age));
+                BMR = (double)((10 * userMacros.Weight) + (6.25 * userMacros.Height) - (5 * userMacros.Age) - 161);
             }
             //Calculate TDEE
             if (userMacros.ActivityLevel == 1) { TDEE = (double)(BMR * 1.2); }
