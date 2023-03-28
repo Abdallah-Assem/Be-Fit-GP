@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ceD7QM7DetsU3d1Je2aTkyIcB4zFyBCu4GW1P+kqYgiq/hkPqgeC9IQFxev6ulhAtHBpTZ39YHgHDCsN7DDIhQ==",
+  "dgSpecHash": "0dqfRWaXO9A5eUHa0J0CJQQVOS/WqB8eQX2h5/A668IgM9bh9/tRtRDN5CCDRxTXHnl057cvLFgn3gS5RfQ9Ig==",
   "success": true,
   "projectFilePath": "D:\\University\\GP\\Be-Fit-GP\\BeFit_Website\\BeFit_Website\\BeFit_Website.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Abdallah Assem\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

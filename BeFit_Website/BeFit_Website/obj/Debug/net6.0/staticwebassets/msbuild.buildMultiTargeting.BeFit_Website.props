@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\BeFit_Website.props" />
+</Project>

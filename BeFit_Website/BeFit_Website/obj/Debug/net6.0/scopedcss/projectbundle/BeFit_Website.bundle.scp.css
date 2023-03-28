@@ -1,0 +1,49 @@
+/* _content/BeFit_Website/Pages/Shared/_Layout.cshtml.rz.scp.css */
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-fff10ghugw] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-fff10ghugw] {
+  color: #0077cc;
+}
+
+.btn-primary[b-fff10ghugw] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-fff10ghugw], .nav-pills .show > .nav-link[b-fff10ghugw] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-fff10ghugw] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-fff10ghugw] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-fff10ghugw] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-fff10ghugw] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-fff10ghugw] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}

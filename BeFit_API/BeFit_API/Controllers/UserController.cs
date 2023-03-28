@@ -12,6 +12,16 @@ namespace BeFit_API.Controllers
             _dbContext = dbContext;
         }
         [HttpPost]
+        [Route("api/add-user")]
+        public async Task<IActionResult> AddUser([FromBody] User user)
+        {
+
+
+
+            return Ok();
+        }
+
+        [HttpPost]
         [Route("api/add-user-macros")]
         public async Task<IActionResult> AddUserMacros (UserMacros userMacros)
         {
