@@ -7,7 +7,7 @@ namespace BeFit_Website.Pages.UserInfo
     {
         public void OnGet()
         {
-            var currentUser = HttpContext.Session.GetString("Id");
+            
         }
     }
 }
