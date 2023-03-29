@@ -8,5 +8,6 @@ namespace BeFit_API.Data
         public WebsiteDbContext(DbContextOptions<WebsiteDbContext> options) : base(options) { }
 
         public DbSet<UserMacros> UserMacros { get; set; }
+        public DbSet<User> User { get; set; }
     }
 }

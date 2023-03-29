@@ -20,7 +20,7 @@ namespace BeFit_API.Migrations
                 .WithColumn("Age").AsInt32().NotNullable()
                 .WithColumn("Gender").AsString().NotNullable()
                 .WithColumn("Goal").AsString().NotNullable()
-                .WithColumn("ActivityLevel").AsInt32().NotNullable()
+                .WithColumn("ActivityLevel").AsString().NotNullable()
                 .WithColumn("DailyCalories").AsDouble().NotNullable()
                 .WithColumn("DailyFats").AsDouble().NotNullable()
                 .WithColumn("DailyCarbs").AsDouble().NotNullable()
