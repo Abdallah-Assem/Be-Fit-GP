@@ -13,6 +13,27 @@ namespace BeFit_API.Controllers
         {
             _dbContext = dbContext;
         }
+
+        //login function
+
+        [HttpPost]
+        [Route("api/login-user")]
+        public async Task<IActionResult> LoginUser([FromBody] User user)
+        {
+            var userdb = await _dbContext.User.FirstOrDefaultAsync(x => x.UserName == user.UserName && x.IsActive == true);
+            if (userdb == null)
+            {
+                return BadRequest("user isn't correct");
+            }
+            if (user.Password != userdb.Password)
+            {
+                return BadRequest("wrong password");
+            }
+            return Ok(userdb.Id);
+        }
+
+        //sign up new user
+
         [HttpPost]
         [Route("api/add-user")]
         public async Task<IActionResult> AddUser([FromBody] User user)
@@ -42,22 +63,7 @@ namespace BeFit_API.Controllers
             return Ok(user.Id);
         }
 
-        [HttpPost]
-        [Route("api/login-user")]
-        public async Task<IActionResult> LoginUser([FromBody] User user)
-        {
-            var userdb = await _dbContext.User.FirstOrDefaultAsync(x => x.UserName == user.UserName && x.IsActive == true);
-            if (userdb == null)
-            {
-                return BadRequest("user isnt correct");
-            }
-            if (user.Password != userdb.Password)
-            {
-                return BadRequest("wrong password");
-            }
-            return Ok(user.Id);
-        }
-
+        //add macros to user
 
         [HttpPost]
         [Route("api/add-user-macros")]

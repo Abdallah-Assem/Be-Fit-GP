@@ -39,9 +39,9 @@ namespace BeFit_Website.Pages.UserInfo
                 HttpContext.Session.SetString("Id", id);
 
 
-                return RedirectToPage("/UserInfo/Index");
+                return RedirectToPage("/Main/Home");
             }
-            Msg = "Wrong username or passowrd";
+            Msg = "Wrong username or password";
             Status = "error";
             RedirectToPage("");
             return Page();
