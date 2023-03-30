@@ -2,6 +2,7 @@
 using BeFit_API.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
 
 namespace BeFit_API.Controllers
 {
@@ -16,6 +17,7 @@ namespace BeFit_API.Controllers
         [Route("api/add-user")]
         public async Task<IActionResult> AddUser([FromBody] User user)
         {
+
             var loggedUser = await _dbContext.User.FirstOrDefaultAsync(x => x.UserName == user.UserName && x.IsActive == true);
 
             if (loggedUser != null)
@@ -30,6 +32,7 @@ namespace BeFit_API.Controllers
             {
                 return BadRequest("Data can not be empty");
             }
+
             //TODO
             user.ProfilePicture = null;
             user.Id = Guid.NewGuid();
@@ -38,6 +41,23 @@ namespace BeFit_API.Controllers
             await _dbContext.SaveChangesAsync();
             return Ok(user.Id);
         }
+
+        [HttpPost]
+        [Route("api/login-user")]
+        public async Task<IActionResult> LoginUser([FromBody] User user)
+        {
+            var userdb = await _dbContext.User.FirstOrDefaultAsync(x => x.UserName == user.UserName && x.IsActive == true);
+            if (userdb == null)
+            {
+                return BadRequest("user isnt correct");
+            }
+            if (user.Password != userdb.Password)
+            {
+                return BadRequest("wrong password");
+            }
+            return Ok(user.Id);
+        }
+
 
         [HttpPost]
         [Route("api/add-user-macros")]
@@ -91,6 +111,6 @@ namespace BeFit_API.Controllers
             await _dbContext.UserMacros.AddAsync(userMacros);
             await _dbContext.SaveChangesAsync();
             return Ok();
-        } 
+        }
     }
 }
