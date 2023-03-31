@@ -14,6 +14,21 @@ namespace BeFit_API.Controllers
             _dbContext = dbContext;
         }
 
+        [HttpPut]
+        [Route("api/edit-user-data/{id}")]
+        public async Task<IActionResult> EditUserData([FromRoute] Guid id,[FromBody] User user)
+        {
+            var UserData = await _dbContext.User.FindAsync(id);  
+            //UserData.ProfilePicture = user.ProfilePicture ;
+            UserData.UserName = user.UserName;
+            UserData.Password = user.Password;
+            UserData.Email = user.Email;
+            _dbContext.User.Update(UserData);
+            await _dbContext.SaveChangesAsync();
+            return Ok();
+        }
+
+
         //login function
 
         [HttpPost]
