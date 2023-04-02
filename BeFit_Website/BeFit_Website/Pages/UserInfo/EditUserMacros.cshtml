@@ -18,7 +18,7 @@
             <span asp-validation-for="userMacros.Age" class="text-danger"></span>
         </div>
         <div class="form-floating form-outline mb-4">
-            <input asp-for="userMacros.Gender" class="form-control" readonly="true" required>
+            <input asp-for="userMacros.Gender" class="form-control" hidden readonly="true" required>
             <label class="form-label">Gender</label>
         </div>
         <div class="input-group mb-3">
@@ -49,4 +49,9 @@
             <p style="color:#000000">Wanna Go Home 🍑? <a class="" asp-page="/Main/Home">Back</a></p>
         </div>
     </form>
+}
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
 }

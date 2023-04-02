@@ -13,6 +13,11 @@ namespace BeFit_Website.Pages.UserInfo
            .AddJsonFile("appsettings.json")
            .AddEnvironmentVariables()
            .Build();
+
+        [TempData]
+        public string Msg { get; set; } = String.Empty;
+        [TempData]
+        public string Status { get; set; } = String.Empty;
         public User user { get; set; } = new();
         public async Task OnGet()
         {
@@ -38,9 +43,16 @@ namespace BeFit_Website.Pages.UserInfo
             var jsoncategory = JsonConvert.SerializeObject(user);
             var content = new StringContent(jsoncategory, Encoding.UTF8, "application/json");
             var request = await client.PutAsync($"/api/edit-user-data{currentUser.ToString().Replace("\"", "")}", content);
-            return RedirectToPage("/Main/Home");
+            if (request.IsSuccessStatusCode) { 
+                return RedirectToPage("/Main/Home");
+            }
+            Msg = "User Already Exists";
+            Status = "error";
+            RedirectToPage("");
+            return Page();
         }
     }
+
 }
 
 
