@@ -1,8 +1,10 @@
 ﻿using BeFit_API.Data;
+using BeFit_API.Methods;
 using BeFit_API.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
+using BeFit_API.Methods;
 
 namespace BeFit_API.Controllers
 {
@@ -14,16 +16,57 @@ namespace BeFit_API.Controllers
             _dbContext = dbContext;
         }
 
-        [HttpPut]
-        [Route("api/edit-user-data/{id}")]
-        public async Task<IActionResult> EditUserData([FromRoute] Guid id,[FromBody] User user)
+        //show user data
+        [HttpGet]
+        [Route("api/get-user-data/{id}")]
+        public async Task<ActionResult<User>> Get(Guid id)
         {
-            var UserData = await _dbContext.User.FindAsync(id);  
-            //UserData.ProfilePicture = user.ProfilePicture ;
-            UserData.UserName = user.UserName;
-            UserData.Password = user.Password;
-            UserData.Email = user.Email;
-            _dbContext.User.Update(UserData);
+            var user = await _dbContext.User.FindAsync(id);
+            if (user == null)
+                return BadRequest("not found");
+            return Ok(user);
+        }
+
+        //show user macro data
+        [HttpGet]
+        [Route("api/get-user-macros/{Userid}")]
+        public async Task<ActionResult<UserMacros>> GetMacros(Guid Userid)
+        {
+            var userMacros = await _dbContext.UserMacros.SingleOrDefaultAsync(x => x.UserId == Userid);
+            if (userMacros == null)
+                return BadRequest("not found");
+            return Ok(userMacros);
+        }
+        //Edit user macros data
+        [HttpPut]
+        [Route("api/edit-user-macros{Userid}")]
+        public async Task<IActionResult> EditUserData(Guid Userid, [FromBody] UserMacros userNewMacros)
+        {
+            var UserOldMacros = await _dbContext.UserMacros.SingleOrDefaultAsync(x => x.UserId == Userid);
+
+            UserOldMacros.Height = userNewMacros.Height;
+            UserOldMacros.Weight = userNewMacros.Weight;
+            UserOldMacros.Age = userNewMacros.Age;
+            UserOldMacros.ActivityLevel = userNewMacros.ActivityLevel;
+            UserOldMacros.Goal = userNewMacros.Goal;
+            CalcMacros calc = new CalcMacros();
+            calc.Calculate(UserOldMacros);
+            await _dbContext.SaveChangesAsync();
+            return Ok();
+        }
+
+        //Edit user data
+        [HttpPut]
+        [Route("api/edit-user-data{id}")]
+        public async Task<IActionResult> EditUserData(Guid id,[FromBody] User newUser)
+        {
+            var UserOldData = await _dbContext.User.FindAsync(id);
+            //TODO
+            //UserOldData.ProfilePicture = user.ProfilePicture ;
+            UserOldData.UserName = newUser.UserName;
+            UserOldData.Password = newUser.Password;
+            UserOldData.Email = newUser.Email;
+
             await _dbContext.SaveChangesAsync();
             return Ok();
         }
@@ -97,38 +140,10 @@ namespace BeFit_API.Controllers
                 return BadRequest("Data can not be empty");
             }
             userMacros.IsActive = true;
-            userMacros.Id= Guid.NewGuid(); 
-            //Calculate BMR (Mifflin-St Jeor)
-            double BMR = 0;
-            double TDEE = 0;
-            if (userMacros.Gender == "Male")
-            {
-                BMR = (double)(5 + (10 * userMacros.Weight) + (6.25 * userMacros.Height) - (5 * userMacros.Age));
-            } else
-            {
-                BMR = (double)((10 * userMacros.Weight) + (6.25 * userMacros.Height) - (5 * userMacros.Age) - 161);
-            }
-            //Calculate TDEE
-            if (userMacros.ActivityLevel == "Sedentary") { TDEE = (double)(BMR * 1.2); }
-            else if (userMacros.ActivityLevel == "Lightly") { TDEE = (double)(BMR * 1.375); }
-            else if (userMacros.ActivityLevel == "Moderately") { TDEE = (double)(BMR * 1.55); }
-            else if (userMacros.ActivityLevel == "Very") { TDEE = (double)(BMR * 1.725); }
-            else if (userMacros.ActivityLevel == "Extra") { TDEE = (double)(BMR * 1.9); }
-            //Calculate Daily Calories
-            if (userMacros.Goal == "Maintain") { userMacros.DailyCalories = Math.Ceiling(TDEE); }
-            else if (userMacros.Goal == "Lose") { userMacros.DailyCalories = Math.Ceiling(TDEE - 300); }
-            else { userMacros.DailyCalories = Math.Ceiling(TDEE + 300); }
-            //Calculate Daily Protein
-            if (userMacros.ActivityLevel == "Sedentary" || userMacros.ActivityLevel == "Lightly") { userMacros.DailyProtein = Math.Ceiling((double)(userMacros.Weight * 0.8)); }
-            else if (userMacros.ActivityLevel == "Moderately") { userMacros.DailyProtein = Math.Ceiling((double)(userMacros.Weight * 1.2)); }
-            else if (userMacros.ActivityLevel == "Very") { userMacros.DailyProtein = Math.Ceiling((double)(userMacros.Weight * 1.5)); }
-            else if (userMacros.ActivityLevel == "Extra") { userMacros.DailyProtein = Math.Ceiling((double)(userMacros.Weight * 2.0)); }
-            //Calculate Daily Fats
-            userMacros.DailyFats = Math.Ceiling(((double)((userMacros.DailyCalories * 0.3)/9)));
-            //Calculate Daily Carbs
-            userMacros.DailyCarbs = Math.Ceiling(((double)((userMacros.DailyCalories * 0.5) / 4)));
-
-
+            userMacros.Id= Guid.NewGuid();
+            CalcMacros calc = new CalcMacros(); 
+            calc.Calculate(userMacros);
+            
             await _dbContext.UserMacros.AddAsync(userMacros);
             await _dbContext.SaveChangesAsync();
             return Ok();
