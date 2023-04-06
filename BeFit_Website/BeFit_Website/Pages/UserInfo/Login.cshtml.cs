@@ -25,7 +25,6 @@ namespace BeFit_Website.Pages.UserInfo
 
         public async Task<IActionResult> OnPost(User user)
         {
-
             var httpClient = HttpContext.RequestServices.GetService<IHttpClientFactory>();
             var client = httpClient.CreateClient();
             client.BaseAddress = new Uri(config["BaseAddress"]);
@@ -37,9 +36,14 @@ namespace BeFit_Website.Pages.UserInfo
             {
                 string id = request.Content.ReadAsStringAsync().GetAwaiter().GetResult();
                 HttpContext.Session.SetString("Id", id);
-
-
+                request = await client.PostAsync($"/api/check-usermacros{id.ToString().Replace("\"", "")}", content);
+            if (request.IsSuccessStatusCode)
+            {
                 return RedirectToPage("/Main/Home");
+            }
+            return RedirectToPage("/UserInfo/UserMacros");
+
+
             }
             Msg = "Wrong username or password";
             Status = "error";

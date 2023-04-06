@@ -89,6 +89,18 @@ namespace BeFit_API.Controllers
             }
             return Ok(userdb.Id);
         }
+        //check if user added his macros or not
+        [HttpPost]
+        [Route("api/check-usermacros{checkedUserId}")]
+        public async Task<IActionResult> CheckUserMacros(Guid checkedUserId)
+        {
+            var userMacrosdb = await _dbContext.UserMacros.FirstOrDefaultAsync(x => x.UserId == checkedUserId);
+            if (userMacrosdb == null)
+            {
+                return BadRequest("This user doesn't have Macros");
+            }
+            return Ok("This user have macros");
+        }
 
         //sign up new user
 

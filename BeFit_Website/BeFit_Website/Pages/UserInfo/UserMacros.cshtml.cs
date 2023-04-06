@@ -23,6 +23,7 @@ namespace BeFit_Website.Pages.UserInfo
         public async Task<IActionResult> OnPost(UserMacros userMacros)
         {
             var currentUser = HttpContext.Session.GetString("Id");
+             
                 if (currentUser != null)
                 {
                     userMacros.UserId = Guid.Parse(currentUser.ToString().Replace("\"", ""));
