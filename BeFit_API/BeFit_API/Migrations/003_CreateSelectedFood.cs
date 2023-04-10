@@ -22,6 +22,7 @@ namespace BeFit_API.Migrations
                 .WithColumn("Fats").AsDouble().NotNullable()
                 .WithColumn("Carbs").AsDouble().NotNullable()
                 .WithColumn("Protein").AsDouble().NotNullable()
+                .WithColumn("Meal").AsString().NotNullable()
                 .WithColumn("TimeCreated").AsDateTime().NotNullable()
                 .WithColumn("IsActive").AsBoolean().NotNullable();
         }

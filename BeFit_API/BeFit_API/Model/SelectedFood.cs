@@ -11,6 +11,7 @@
         public double Fats { get; set; }
         public double Carbs { get; set; }
         public double Protein { get; set; }
+        public string Meal { get; set; } = string.Empty;
         public DateTime TimeCreated { get; set;}
         public bool IsActive { get; set;}
     }

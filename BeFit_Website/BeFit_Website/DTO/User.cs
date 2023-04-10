@@ -1,4 +1,6 @@
-﻿namespace BeFit_Website.DTO
+﻿using Newtonsoft.Json.Serialization;
+
+namespace BeFit_Website.DTO
 {
     public class User
     {
