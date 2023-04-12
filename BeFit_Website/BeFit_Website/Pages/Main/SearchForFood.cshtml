@@ -1,51 +1,93 @@
 ﻿@page
 @model BeFit_Website.Pages.Main.SearchForFoodModel
 @{
-    <form method="post" class="align-content-center col-6 w-25" style="margin:auto;text-align:center;color:#1A2238;" enctype="multipart/form-data">
+    <head>
+        <link rel="stylesheet" href="~/css/SearchForFood.css" />
+    </head>
+    <form method="post" asp-page-handler="SaveData1" class="align-content-center col-6 w-25" style="margin:auto;text-align:center;color:#1A2238;" enctype="multipart/form-data">
         <div class="form-floating form-outline mb-4">
             <input asp-for="food.name" class="form-control"  required>
             <label class="form-label">Search a food by Name only.</label>
         </div>
-        <button type="submit" class="btn btn-success btn-block mb-3"><i class="bi bi-patch-plus"> Search 🔍</i></button>
+        <button type="submit" name="button" value="1" class="btn btn-success btn-block mb-3"><i class="bi bi-patch-plus"> Search 🔍</i></button>
+        
 
-        <div class="form-floating form-outline mb-4" id="Searched-Food-Container"></div>
+    <input type="hidden" name="formType" value="ButtonForm"/>
+    <div class="form-floating form-outline mb-4" id="Searched-Food-Container">
+        @if (!string.IsNullOrEmpty(Model.food.name))
+        {
+            <div>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Calories</th>
+                        <th>Fats</th>
+                        <th>Carbs</th>
+                        <th>Protein</th>
+                    </tr>
+                    <tr>
+                        <td>@Model.food.name</td>
+                        <td>@Model.food.calories</td>
+                        <td>@Model.food.fat_total_g</td>
+                        <td>@Model.food.carbohydrates_total_g</td>
+                        <td>@Model.food.protein_g</td>
+                        <td><button  class="show-PopUp btn btn-success btn-block mb-3"> Add ➕</button></td>
+                    </tr>
+                </table>
+            </div>      
+        }
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <div>
+                <span>
+                    There were no results for your search.
+                    <br>
+                    <b>Suggestions:</b>
+                    <br>
+                    1- Make sure all words are spelled correctly.
+                    <br>
+                    2- Search by ingredient.
+                    <br>
+                    3- Try more general keywords like 'apple'.
+                </span>
+            </div>
+        }
+    </div>
+        <div class="PopUp hidden">
+            <button class="close-PopUp">&times;</button>
+            <h1>I'm a modal window 😍</h1>
+            <p>
+                Lorem
+            </p>
+        <button type="submit" name="button" value="2" class="btn btn-success btn-block mb-3"><i class="bi bi-patch-plus"> Search 🔍</i></button>
+        </div>
+        <div class="overlay hidden"></div>
     </form>
-    //Show data
-    @if (!string.IsNullOrEmpty(Model.food.name))
-    {
-        <div>
-            <table style="font-family: arial, sans-serif;border-collapse: collapse;width: 100%;border: 1px solid #000000;">
-                <tr>
-                    <th>Name</th>
-                    <th>Calories</th>
-                    <th>Fats</th>
-                    <th>Carbs</th>
-                    <th>Protein</th>
-                </tr>
-                <tr>
-                    <td>@Model.food.name</td>
-                    <td>@Model.food.calories</td>
-                    <td>@Model.food.fat_total_g</td>
-                    <td>@Model.food.carbohydrates_total_g</td>
-                    <td>@Model.food.protein_g</td>
-                </tr>
-            </table>
-        </div>
-    }
-    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
-    {
-        <div>
-            <span>
-                There were no results for your search.
-                <br>
-                <b>Suggestions:</b>
-                <br>
-                1- Make sure all words are spelled correctly.
-                <br>
-                2- Search by ingredient.
-                <br>
-                3- Try more general keywords like 'apple'.
-            </span>
-        </div>
-    }
+    
 }
+<script>
+
+    const PopUp = document.querySelector('.PopUp');
+    const overlay = document.querySelector('.overlay');
+    const closePopUp = document.querySelector('.close-PopUp');
+    const showPopUp = document.querySelector('.show-PopUp');
+
+    function openPopUp() {
+        PopUp.classList.remove('hidden');
+        overlay.classList.remove('hidden');
+    }
+    function exitPopUp() {
+        PopUp.classList.add('hidden');
+        overlay.classList.add('hidden');
+    }
+    //make btns do their job
+    showPopUp.addEventListener('click', openPopUp);
+    //close the pop-up window by X btn
+    closePopUp.addEventListener('click', exitPopUp);
+    //close the pop-up window by clicking on page
+    overlay.addEventListener('click', exitPopUp);
+    //close the pop-up by escape on keyboard
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') exitPopUp();
+    });
+</script>

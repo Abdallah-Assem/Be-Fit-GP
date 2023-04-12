@@ -34,7 +34,7 @@ namespace BeFit_Website.Pages.UserInfo
             }
 
         }
-        public async Task<IActionResult> OnPost(User user, Guid id)
+        public async Task<IActionResult> OnPost(User user)
         {
             var currentUser = HttpContext.Session.GetString("Id");
             var httpClient = HttpContext.RequestServices.GetService<IHttpClientFactory>();

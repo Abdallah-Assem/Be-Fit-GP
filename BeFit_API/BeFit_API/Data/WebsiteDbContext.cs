@@ -9,5 +9,7 @@ namespace BeFit_API.Data
 
         public DbSet<UserMacros> UserMacros { get; set; }
         public DbSet<User> User { get; set; }
+        public DbSet<SelectedFood> SelectedFood { get; set; }
+        public DbSet<SpecialFood> SpecialFood { get; set; }
     }
 }

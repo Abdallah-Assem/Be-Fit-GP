@@ -1,23 +1,69 @@
 ﻿@page
 @model BeFit_Website.Pages.UserInfo.LoginModel
 @{
-<form method="post" class="align-content-center col-6 w-25" style="margin:auto;text-align:center;color:#1A2238;" enctype="multipart/form-data">
-    <div class="form-floating form-outline mb-4">
-        <input asp-for="user.UserName" class="form-control" required>
-        <label class="form-label">Username</label>
-        <span asp-validation-for="user.UserName" class="text-danger"></span>
-    </div>
-    <div class="form-floating form-outline mb-4">
-        <input asp-for="user.Password" class="form-control" type="password" required>
-        <label class="form-label">Password</label>
-        <span asp-validation-for="user.Password" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-success btn-block mb-3"><i class="bi bi-patch-plus"> Login 💪</i></button>
-    <div class="text-center">
-    </div>
-        <div class="text-center">
-            <p style="color:#000000">Not a member yet? <a class="" asp-page="/UserInfo/SignUp">Sign Up Now!</a></p>
+    <head>
+        <meta name="viewport" content="width=device-width"/>
+        <title>_Login</title>
+        <link rel="stylesheet" href="~/css/Login.css" />
+    <script src="https://kit.fontawesome.com/37b656b940.js"
+            crossorigin="anonymous"></script>
+    </head>
+<form method="post" class="" style="" enctype="multipart/form-data">
+    <div class="container">
+      <div class="screen">
+        <div class="screen__content">
+          <div class="row justify-content-md-center login">
+          <h1 class="tilte">Login</h1>
+            <div class="col-md-4">
+              <div class="card">
+                <div class="card-body">
+                    <i class="fas fa-user"></i>
+                    <input
+                      asp-for="user.UserName"
+                      placeholder="User Name"
+                      class="login__input "
+                      required
+                    />
+                </div>
+                    <div>
+                        <br>
+                        <span
+                          asp-validation-for="user.UserName" class="text-danger" style="color:red"></span>
+                        <br>
+                    </div>
+                    <i class="fas fa-lock"></i>
+                    <input
+                      asp-for="user.Password"
+                      placeholder="Password"
+                      type="password"
+                      class="login__input "
+                      required
+                    />
+                    <div>
+                        <br>
+                        <span asp-validation-for="user.Password" class="text-danger" style="color:red"></span>
+                        <br>
+                    </div>
+              </div>
+            </div>
+          </div>
+                <div class="form-group">
+                    <input type="submit"
+                           name="submit"
+                           class="button login__submit"
+                           value="Login" />
+                </div>
+          <div class="social-login">
+            <h5>Don't have an account?'</h5>
+            <br />
+            <h3>
+              <a class="" asp-page="/UserInfo/SignUp">Sign Up Now!</a>
+            </h3>
+          </div>
+      </div>
+          
         </div>
+    </div>
 </form>
 
 }

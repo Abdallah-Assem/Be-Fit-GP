@@ -1,0 +1,152 @@
+﻿
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Raleway, sans-serif;
+}
+body {
+    background-image: url('../photos/background1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    position: absolute;
+    padding-left: 200px;
+}
+
+.screen {
+    background: radial-gradient( circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90% );
+    position: relative;
+    height: 580px;
+    width: 390px;
+    box-shadow: 0px 0px 24px #5c5696;
+    border-radius: 20px;
+}
+
+.screen__content {
+    z-index: 1;
+    position: relative;
+    height: 100%;
+}
+
+.screen__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    clip-path: inset(0 0 0 0);
+}
+
+.screen__background__shape {
+    transform: rotate(45deg);
+    position: absolute;
+}
+.tilte {
+    margin-bottom: 30px
+}
+.login {
+    width: 320px;
+    padding: 30px;
+    padding-top: 120px;
+}
+
+.login__field {
+    padding: 20px 0px;
+    position: relative;
+}
+
+#email_error,
+#pass_error {
+    margin-top: 5px;
+    width: 100%;
+    font-size: 10px;
+    color: #ff0000;
+    display: none;
+}
+
+.login__icon {
+    position: absolute;
+    top: 300px;
+    color: #7875b5;
+}
+
+.login__input {
+    border: none;
+    border-bottom: 2px solid #d1d1d4;
+    background: none;
+    padding: 10px;
+    padding-left: 24px;
+    font-weight: 700;
+    width: 75%;
+    transition: 0.2s;
+}
+
+    .login__input:active,
+    .login__input:focus,
+    .login__input:hover {
+        outline: none;
+        border-bottom-color: black;
+    }
+
+.login__submit {
+    background: linear-gradient(to right, #434343 0%, black 100%);
+    font-size: 14px;
+    margin-top: 20px;
+    margin-left: 30px;
+    padding: 16px 40px;
+    border-radius: 20px;
+    border: 1px solid #d4d3e8;
+    text-transform: uppercase;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    width: 43%;
+    color: #fff;
+    box-shadow: 0px 2px 2px white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+    .login__submit:active,
+    .login__submit:focus,
+    .login__submit:hover {
+        border-color: black;
+        outline: none;
+        text-transform: uppercase;
+    }
+
+.fa-regular {
+    font-size: 20px;
+    margin-left: auto;
+    color: #000000;
+}
+
+.fa-solid {
+    font-size: 20px;
+    margin-left: auto;
+    color: #000000;
+}
+
+.social-login {
+    position: absolute;
+    height: 100px;
+    width: 160px;
+    text-align: center;
+    bottom: 0px;
+    right: 30px;
+    color: black;
+}
+
+    .social-login a {
+        color: black;
+        font-size: 12px;
+    }

@@ -64,5 +64,31 @@ namespace BeFit_API.Controllers
 
             }
         }
+
+        [HttpPost]
+        [Route("api/add-selected-food")]
+        public async Task<IActionResult> AddSelectedFood([FromBody] SelectedFood selectedFood, [FromBody] Food food)
+        {
+            if (
+                selectedFood.UserId == Guid.Empty
+                && string.IsNullOrEmpty(selectedFood.FoodName)
+                && selectedFood.Weight <= 0
+                && selectedFood.Quantity <= 0
+                && string.IsNullOrEmpty(selectedFood.Meal)
+                )
+            {
+                return BadRequest();
+            }
+            selectedFood.Id = Guid.NewGuid();
+            selectedFood.TimeCreated = DateTime.Now;
+            selectedFood.IsActive = true;
+            selectedFood.Calories = food.calories;
+            selectedFood.Fats = food.fat_total_g;
+            selectedFood.Carbs = food.carbohydrates_total_g;
+            selectedFood.Protein = food.protein_g;
+            await _dbContext.SelectedFood.AddAsync(selectedFood);
+            await _dbContext.SaveChangesAsync();
+            return Ok(selectedFood);
+        }
     }
 }
