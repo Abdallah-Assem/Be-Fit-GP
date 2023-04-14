@@ -67,28 +67,35 @@ namespace BeFit_API.Controllers
 
         [HttpPost]
         [Route("api/add-selected-food")]
-        public async Task<IActionResult> AddSelectedFood([FromBody] SelectedFood selectedFood, [FromBody] Food food)
+        public async Task<IActionResult> AddSelectedFood([FromBody] CombineFood_SelectedFood Food_SelectedFood)
         {
             if (
-                selectedFood.UserId == Guid.Empty
-                && string.IsNullOrEmpty(selectedFood.FoodName)
-                && selectedFood.Weight <= 0
-                && selectedFood.Quantity <= 0
-                && string.IsNullOrEmpty(selectedFood.Meal)
+                Food_SelectedFood.CombinedSelectedFood.UserId == Guid.Empty
+                && string.IsNullOrEmpty(Food_SelectedFood.CombinedFood.name)
+                && Food_SelectedFood.CombinedSelectedFood.Weight <= 0
+                && Food_SelectedFood.CombinedSelectedFood.Quantity <= 0
+                && string.IsNullOrEmpty(Food_SelectedFood.CombinedSelectedFood.Meal)
                 )
             {
                 return BadRequest();
             }
-            selectedFood.Id = Guid.NewGuid();
-            selectedFood.TimeCreated = DateTime.Now;
-            selectedFood.IsActive = true;
-            selectedFood.Calories = food.calories;
-            selectedFood.Fats = food.fat_total_g;
-            selectedFood.Carbs = food.carbohydrates_total_g;
-            selectedFood.Protein = food.protein_g;
-            await _dbContext.SelectedFood.AddAsync(selectedFood);
+            Food_SelectedFood.CombinedSelectedFood.Id = Guid.NewGuid();
+            Food_SelectedFood.CombinedSelectedFood.TimeCreated = DateTime.Now;
+            Food_SelectedFood.CombinedSelectedFood.IsActive = true;
+            Food_SelectedFood.CombinedSelectedFood.FoodName = Food_SelectedFood.CombinedFood.name;
+            Food_SelectedFood.CombinedSelectedFood.Calories =
+                ((Food_SelectedFood.CombinedFood.calories * Food_SelectedFood.CombinedSelectedFood.Weight) / 100) * Food_SelectedFood.CombinedSelectedFood.Quantity;
+            Food_SelectedFood.CombinedSelectedFood.Fats =
+                ((Food_SelectedFood.CombinedFood.fat_total_g * Food_SelectedFood.CombinedSelectedFood.Weight) / 100) * Food_SelectedFood.CombinedSelectedFood.Quantity;
+            Food_SelectedFood.CombinedSelectedFood.Carbs =
+                ((Food_SelectedFood.CombinedFood.carbohydrates_total_g * Food_SelectedFood.CombinedSelectedFood.Weight) / 100) * Food_SelectedFood.CombinedSelectedFood.Quantity;
+            Food_SelectedFood.CombinedSelectedFood.Protein =
+                ((Food_SelectedFood.CombinedFood.protein_g * Food_SelectedFood.CombinedSelectedFood.Weight) / 100) * Food_SelectedFood.CombinedSelectedFood.Quantity;
+
+
+            await _dbContext.SelectedFood.AddAsync(Food_SelectedFood.CombinedSelectedFood);
             await _dbContext.SaveChangesAsync();
-            return Ok(selectedFood);
+            return Ok(Food_SelectedFood.CombinedSelectedFood);
         }
     }
 }

@@ -1,11 +1,16 @@
-﻿namespace BeFit_Website.DTO
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BeFit_Website.DTO
 {
     public class SelectedFood
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public string FoodName { get; set; } = string.Empty;
+
+        [Range(0, 10000, ErrorMessage = "Enter Valid Weight")]
         public double Weight { get; set; }
+        [Range(0, 100, ErrorMessage = "Enter Valid Quantity")]
         public int Quantity { get; set; }
         public double Calories { get; set; }
         public double Fats { get; set; }
