@@ -5,6 +5,7 @@ using Azure.Core;
 using Microsoft.Extensions.Options;
 using System.Text.Json;
 using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore;
 
 namespace BeFit_API.Controllers
 {
@@ -96,6 +97,34 @@ namespace BeFit_API.Controllers
             await _dbContext.SelectedFood.AddAsync(Food_SelectedFood.CombinedSelectedFood);
             await _dbContext.SaveChangesAsync();
             return Ok(Food_SelectedFood.CombinedSelectedFood);
+        }
+
+        [HttpGet]
+        [Route("api/get-special-food/{id}")]
+        public async Task<ActionResult<List<SpecialFood>>> GetSpecialFood(Guid id)
+        {
+            List<SpecialFood> specialFood = await _dbContext.SpecialFood.Where(x => x.UserId == id).ToListAsync();
+            return Ok(specialFood);
+        }
+        
+        [HttpPost]
+        [Route("api/add-special-food")]
+        public async Task<IActionResult> AddSpecialFood([FromBody] SpecialFood specialFood)
+        {
+            if (
+                specialFood.UserId == Guid.Empty
+                && string.IsNullOrEmpty(specialFood.Name)
+                && specialFood.Calories <= 0
+                && specialFood.Fats <= 0
+                && specialFood.Carbs <= 0
+                && specialFood.Protein <= 0
+                )
+            {
+                return BadRequest("no special food");
+            }
+            await _dbContext.SpecialFood.AddAsync(specialFood);
+            await _dbContext.SaveChangesAsync();
+            return Ok(specialFood);
         }
     }
 }

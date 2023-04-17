@@ -21,12 +21,43 @@ namespace BeFit_Website.Pages.Main
         public string ErrorMessage { get; set; } = string.Empty;
 
         public CombineFood_SelectedFood Food_SelectedFood { get; set; } = new();
-        public SelectedFood selectedFood { get; set; }
+        public SelectedFood SelectedFood { get; set; }
+        public List<SpecialFood> SpecialFood { get; set; } = new();
         public async Task OnGet(Food? searchedFood,string? errorMessage)
         {
             food = searchedFood;
             ErrorMessage = errorMessage;
+
+            var currentUser = HttpContext.Session.GetString("Id");
+            var httpClient = HttpContext.RequestServices.GetService<IHttpClientFactory>();
+            var client = httpClient.CreateClient();
+            client.BaseAddress = new Uri(config["BaseAddress"]);
+            var request = await client.GetStringAsync("api/get-special-food/" + currentUser.ToString().Replace("\"", ""));
+
+            if (request != null)
+            {
+                //var stringData = request.Content.ReadAsStringAsync().Result();
+                SpecialFood = JsonConvert.DeserializeObject<List<SpecialFood>>(request);
+            }
+
         }
+
+        //public async Task OnGetSpecialFood()
+        //{
+        //    var currentUser = HttpContext.Session.GetString("Id");
+        //    var httpClient = HttpContext.RequestServices.GetService<IHttpClientFactory>();
+        //    var client = httpClient.CreateClient();
+        //    client.BaseAddress = new Uri(config["BaseAddress"]);
+        //    var request = await client.GetStringAsync("api/get-special-food/" + currentUser.ToString().Replace("\"", ""));
+
+        //    if (request != null)
+        //    {
+        //        //var stringData = request.Content.ReadAsStringAsync().Result();
+        //        SpecialFood = JsonConvert.DeserializeObject <List<SpecialFood>>(request);
+        //    }
+
+        //}
+
         public async Task<IActionResult> OnPostSearch(Food food)
         {
             

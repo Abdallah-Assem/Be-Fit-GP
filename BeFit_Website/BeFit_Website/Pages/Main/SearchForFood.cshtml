@@ -45,6 +45,32 @@
                 </table>
             </div>      
         }
+         <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Calories</th>
+                <th>Fats</th>
+                <th>Carbs</th>
+                <th>Protein</th>
+                <th>buttons</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var obj in Model.SpecialFood)
+            {
+                <tr>
+                    <td>@obj.Name</td>
+                    <td>@obj.Calories</td>
+                    <td>@obj.Carbs</td>
+                    <td>@obj.Fats</td>
+                    <td>@obj.Protein</td>
+
+                </tr>
+            }
+        </tbody>
+
+    </table>
         @if (!string.IsNullOrEmpty(Model.ErrorMessage))
         {
             <div>
@@ -94,6 +120,8 @@
     </div>
     <div class="overlay hidden"></div>
     </form>
+
+   
     
 }
 @section Scripts{
