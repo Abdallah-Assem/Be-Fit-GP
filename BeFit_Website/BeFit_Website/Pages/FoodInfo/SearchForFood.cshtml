@@ -1,5 +1,5 @@
 ﻿@page
-@model BeFit_Website.Pages.Main.SearchForFoodModel
+@model BeFit_Website.Pages.FoodInfo.SearchForFoodModel
 @{
     <head>
         <link rel="stylesheet" href="~/css/SearchForFood.css" />
@@ -10,6 +10,9 @@
             <label class="form-label">Search a food by Name only.</label>
         </div>
         <button type="submit" asp-page-handler="Search" class="btn btn-success btn-block mb-3"><i class="bi bi-patch-plus"> Search 🔍</i></button>
+        <div class="text-center">
+            <p style="color:#000000">Create your own Food. <a class="" asp-page="/FoodInfo/SpecialFood">Create..</a></p>
+        </div>
     <div class="form-floating form-outline mb-4" id="Searched-Food-Container">
         @if (!string.IsNullOrEmpty(Model.food.name))
         {
@@ -45,32 +48,6 @@
                 </table>
             </div>      
         }
-         <table class="table table-bordered table-striped" style="width:100%">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Calories</th>
-                <th>Fats</th>
-                <th>Carbs</th>
-                <th>Protein</th>
-                <th>buttons</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(var obj in Model.SpecialFood)
-            {
-                <tr>
-                    <td>@obj.Name</td>
-                    <td>@obj.Calories</td>
-                    <td>@obj.Carbs</td>
-                    <td>@obj.Fats</td>
-                    <td>@obj.Protein</td>
-
-                </tr>
-            }
-        </tbody>
-
-    </table>
         @if (!string.IsNullOrEmpty(Model.ErrorMessage))
         {
             <div>

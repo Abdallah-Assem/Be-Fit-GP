@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
-namespace BeFit_Website.Pages.Main
+namespace BeFit_Website.Pages.FoodInfo
 {
     public class SearchForFoodModel : PageModel
     {
@@ -15,52 +15,23 @@ namespace BeFit_Website.Pages.Main
            .AddEnvironmentVariables()
            .Build();
 
-        [BindProperty(Name = "button")]
-        public string Button { get; set; }
-        public  Food food { get; set; } = new();
+        public Food food { get; set; } = new();
         public string ErrorMessage { get; set; } = string.Empty;
 
         public CombineFood_SelectedFood Food_SelectedFood { get; set; } = new();
         public SelectedFood SelectedFood { get; set; }
         public List<SpecialFood> SpecialFood { get; set; } = new();
-        public async Task OnGet(Food? searchedFood,string? errorMessage)
+        public async Task OnGet(Food? searchedFood, string? errorMessage)
         {
             food = searchedFood;
             ErrorMessage = errorMessage;
 
-            var currentUser = HttpContext.Session.GetString("Id");
-            var httpClient = HttpContext.RequestServices.GetService<IHttpClientFactory>();
-            var client = httpClient.CreateClient();
-            client.BaseAddress = new Uri(config["BaseAddress"]);
-            var request = await client.GetStringAsync("api/get-special-food/" + currentUser.ToString().Replace("\"", ""));
-
-            if (request != null)
-            {
-                //var stringData = request.Content.ReadAsStringAsync().Result();
-                SpecialFood = JsonConvert.DeserializeObject<List<SpecialFood>>(request);
-            }
-
         }
 
-        //public async Task OnGetSpecialFood()
-        //{
-        //    var currentUser = HttpContext.Session.GetString("Id");
-        //    var httpClient = HttpContext.RequestServices.GetService<IHttpClientFactory>();
-        //    var client = httpClient.CreateClient();
-        //    client.BaseAddress = new Uri(config["BaseAddress"]);
-        //    var request = await client.GetStringAsync("api/get-special-food/" + currentUser.ToString().Replace("\"", ""));
-
-        //    if (request != null)
-        //    {
-        //        //var stringData = request.Content.ReadAsStringAsync().Result();
-        //        SpecialFood = JsonConvert.DeserializeObject <List<SpecialFood>>(request);
-        //    }
-
-        //}
 
         public async Task<IActionResult> OnPostSearch(Food food)
         {
-            
+
             var httpClient = HttpContext.RequestServices.GetService<IHttpClientFactory>();
             var client = httpClient.CreateClient();
             client.BaseAddress = new Uri(config["BaseAddress"]);
@@ -107,5 +78,5 @@ namespace BeFit_Website.Pages.Main
             return new NoContentResult();
 
         }
-    }    
+    }
 }

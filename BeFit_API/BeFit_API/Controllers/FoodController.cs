@@ -98,13 +98,56 @@ namespace BeFit_API.Controllers
             await _dbContext.SaveChangesAsync();
             return Ok(Food_SelectedFood.CombinedSelectedFood);
         }
+        [HttpPost]
+        [Route("api/add-special-food-to-selected-food")]
+        public async Task<IActionResult> AddSpecialFoodToSelectedFood([FromBody] CombineSpecialFood_SelectedFood SpecialFood_SelectedFood)
+        {
+            if (
+                SpecialFood_SelectedFood.CombinedSelectedFood.UserId == Guid.Empty
+                && string.IsNullOrEmpty(SpecialFood_SelectedFood.CombinedSpecialFood.Name)
+                && SpecialFood_SelectedFood.CombinedSelectedFood.Weight <= 0
+                && SpecialFood_SelectedFood.CombinedSelectedFood.Quantity <= 0
+                && string.IsNullOrEmpty(SpecialFood_SelectedFood.CombinedSelectedFood.Meal)
+                )
+            {
+                return BadRequest();
+            }
+            SpecialFood_SelectedFood.CombinedSelectedFood.Id = Guid.NewGuid();
+            SpecialFood_SelectedFood.CombinedSelectedFood.TimeCreated = DateTime.Now;
+            SpecialFood_SelectedFood.CombinedSelectedFood.IsActive = true;
+            SpecialFood_SelectedFood.CombinedSelectedFood.FoodName = SpecialFood_SelectedFood.CombinedSpecialFood.Name;
+            SpecialFood_SelectedFood.CombinedSelectedFood.Calories =
+                ((SpecialFood_SelectedFood.CombinedSpecialFood.Calories * SpecialFood_SelectedFood.CombinedSelectedFood.Weight) / 100) * SpecialFood_SelectedFood.CombinedSelectedFood.Quantity;
+            SpecialFood_SelectedFood.CombinedSelectedFood.Carbs =
+                ((SpecialFood_SelectedFood.CombinedSpecialFood.Carbs * SpecialFood_SelectedFood.CombinedSelectedFood.Weight) / 100) * SpecialFood_SelectedFood.CombinedSelectedFood.Quantity;
+            SpecialFood_SelectedFood.CombinedSelectedFood.Fats =
+                ((SpecialFood_SelectedFood.CombinedSpecialFood.Fats * SpecialFood_SelectedFood.CombinedSelectedFood.Weight) / 100) * SpecialFood_SelectedFood.CombinedSelectedFood.Quantity;
+            SpecialFood_SelectedFood.CombinedSelectedFood.Protein =
+                ((SpecialFood_SelectedFood.CombinedSpecialFood.Protein * SpecialFood_SelectedFood.CombinedSelectedFood.Weight) / 100) * SpecialFood_SelectedFood.CombinedSelectedFood.Quantity;
+
+            await _dbContext.SelectedFood.AddAsync(SpecialFood_SelectedFood.CombinedSelectedFood);
+            await _dbContext.SaveChangesAsync();
+            return Ok(SpecialFood_SelectedFood.CombinedSelectedFood);
+        }
 
         [HttpGet]
-        [Route("api/get-special-food/{id}")]
-        public async Task<ActionResult<List<SpecialFood>>> GetSpecialFood(Guid id)
+        [Route("api/get-special-food/{userid}")]
+        public async Task<ActionResult<List<SpecialFood>>> GetSpecialFood(Guid userid)
         {
-            List<SpecialFood> specialFood = await _dbContext.SpecialFood.Where(x => x.UserId == id).ToListAsync();
+            List<SpecialFood> specialFood = await _dbContext.SpecialFood.Where(x => x.UserId == userid).ToListAsync();
             return Ok(specialFood);
+        }
+
+        [HttpGet]
+        [Route("api/get-one-special-food/{id}")]
+        public async Task<ActionResult<SpecialFood>> GetOneSpecialFood(Guid id)
+        {
+            var specialdb = await _dbContext.SpecialFood.FirstOrDefaultAsync(x => x.Id == id);
+            if (specialdb == null)
+            {
+                return BadRequest("Special Food doesn't exist");
+            }
+            return Ok(specialdb);
         }
         
         [HttpPost]
@@ -122,6 +165,7 @@ namespace BeFit_API.Controllers
             {
                 return BadRequest("no special food");
             }
+            specialFood.Id = Guid.NewGuid();
             await _dbContext.SpecialFood.AddAsync(specialFood);
             await _dbContext.SaveChangesAsync();
             return Ok(specialFood);

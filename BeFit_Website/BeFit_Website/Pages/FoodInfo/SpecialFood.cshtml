@@ -1,0 +1,129 @@
+﻿@page
+@model BeFit_Website.Pages.FoodInfo.SpecialFoodModel
+@{
+    <head>
+        <link href="~/css/searchforfood.css" rel="stylesheet" />
+    </head>
+    <h1> your Special Food</h1>
+    <table class="table table-bordered table-striped" >
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Calories</th>
+                <th>Fats</th>
+                <th>Carbs</th>
+                <th>Protein</th>
+                <th><button type="button" class="show-PopUp">Add New ➕</button></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model.specialFoodList)
+            {
+                <tr>
+                        <td>@obj.Name</td>
+                        <td>@obj.Calories</td>
+                        <td>@obj.Carbs</td>
+                        <td>@obj.Fats</td>
+                        <td>@obj.Protein</td>
+                        <td>
+                            <form method="post" enctype="multipart/form-data">
+                            <div class="form-floating form-outline mb-4">
+                                <label class="form-label">Quantity: </label>
+                                <input asp-for="SpecialFood_SelectedFood.CombinedSelectedFood.Quantity" value="1" step="1" class="form-control" type="number" required>
+                                <span asp-validation-for="SpecialFood_SelectedFood.CombinedSelectedFood.Quantity" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating form-outline mb-4">
+                                <label class="form-label">Weight (g):</label>
+                                <input asp-for="SpecialFood_SelectedFood.CombinedSelectedFood.Weight" value="100" class="form-control" type="number" required>
+                                <span asp-validation-for="SpecialFood_SelectedFood.CombinedSelectedFood.Weight" class="text-danger"></span>
+                            </div>
+                            <div>
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text">Meal</label>
+                                    <select class="form-select" asp-for="SpecialFood_SelectedFood.CombinedSelectedFood.Meal" required>
+                                        <option hidden></option>
+                                        <option value="Breakfast">Breakfast</option>
+                                        <option value="Lunch">Lunch</option>
+                                        <option value="Dinner">Dinner</option>
+                                        <option value="Snacks">Snacks</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <span asp-validation-for="SpecialFood_SelectedFood.CombinedSelectedFood.Meal" class="text-danger"></span>
+                                <button type="submit" asp-page-handler="Select" asp-route-itemid=@obj.Id>Add</button>
+                                </div>
+                             </div>
+                            </form>
+                        </td>
+                        
+                </tr>
+            }
+        </tbody>
+    </table>
+    <form method="post" enctype="multipart/form-data">
+        <div class="PopUp hidden">
+            <button type="button" class="close-PopUp">&times;</button>
+            <h1>Details of your special food </h1>
+            <div class="form-floating form-outline mb-4">
+                <label class="form-label">Food Name: </label>
+                <input asp-for="specialFood.Name" class="form-control" required>
+                <span asp-validation-for="specialFood.Name" class="text-danger"></span>
+            </div>
+            <div class="form-floating form-outline mb-4">
+                <label class="form-label">Calories: </label>
+                <input asp-for="specialFood.Calories"  class="form-control" type="number" required>
+                <span asp-validation-for="specialFood.Calories" class="text-danger"></span>
+            </div>
+            <div class="form-floating form-outline mb-4">
+                <label class="form-label">Protein: </label>
+                <input asp-for="specialFood.Protein" class="form-control" type="number" required>
+                <span asp-validation-for="specialFood.Protein" class="text-danger"></span>
+            </div>
+            <div class="form-floating form-outline mb-4">
+                <label class="form-label">Carbs: </label>
+                <input asp-for="specialFood.Carbs" class="form-control" type="number" required>
+                <span asp-validation-for="specialFood.Carbs" class="text-danger"></span>
+            </div>
+            <div class="form-floating form-outline mb-4">
+                <label class="form-label">Fats </label>
+                <input asp-for="specialFood.Fats" class="form-control" type="number" required>
+                <span asp-validation-for="specialFood.Fats" class="text-danger"></span>
+            </div>
+            
+            <button type="submit" asp-page-handler="AddSpecialFood" class="btn btn-success btn-block mb-3"><i class="bi bi-patch-plus"> Add Special Food ➕</i></button>
+        </div>
+        <div class="overlay hidden"></div>
+    </form>
+
+}
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+<script>
+
+    const PopUp = document.querySelector('.PopUp');
+    const overlay = document.querySelector('.overlay');
+    const closePopUp = document.querySelector('.close-PopUp');
+    const showPopUp = document.querySelector('.show-PopUp');
+
+    function openPopUp() {
+        PopUp.classList.remove('hidden');
+        overlay.classList.remove('hidden');
+    }
+    function exitPopUp() {
+        PopUp.classList.add('hidden');
+        overlay.classList.add('hidden');
+    }
+    //make btns do their job
+    showPopUp.addEventListener('click', openPopUp);
+    //close the pop-up window by X btn
+    closePopUp.addEventListener('click', exitPopUp);
+    //close the pop-up window by clicking on page
+    overlay.addEventListener('click', exitPopUp);
+    //close the pop-up by escape on keyboard
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') exitPopUp();
+    });
+</script>
