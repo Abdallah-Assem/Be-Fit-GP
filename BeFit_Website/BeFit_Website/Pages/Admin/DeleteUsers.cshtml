@@ -1,0 +1,36 @@
+﻿@page
+@model BeFit_Website.Pages.Admin.DeleteUsersModel
+@{
+    <h1> Users</h1>
+    <table class="table table-bordered table-striped" >
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>E-mail</th>
+                <th>Profile Picture</th>
+                <th>Is Active</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model.usersList)
+            {
+                <tr>
+                    <td>@obj.UserName</td>
+                    <td>@obj.Email</td>
+                    <td>@obj.ProfilePicture</td>
+                    <td>@obj.IsActive</td>
+                    <td>
+                    <form method="post">
+                            <button type="submit" asp-page-handler="DeleteUser" asp-route-itemid=@obj.Id>Delete ❌</button>
+                    </form>
+                    </td>
+                    <td>
+                        <form method="post">
+                            <button type="submit" asp-page-handler="RestoreUser" asp-route-itemid=@obj.Id>Restore ♻️</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

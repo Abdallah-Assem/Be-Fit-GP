@@ -81,7 +81,7 @@ namespace BeFit_API.Controllers
             var userdb = await _dbContext.User.FirstOrDefaultAsync(x => x.UserName == user.UserName && x.IsActive == true);
             if (userdb == null)
             {
-                return BadRequest("user isn't correct");
+                return BadRequest("username isn't correct");
             }
             if (user.Password != userdb.Password)
             {
@@ -128,6 +128,7 @@ namespace BeFit_API.Controllers
             user.ProfilePicture = null;
             user.Id = Guid.NewGuid();
             user.IsActive = true;
+            user.Role = "User";
             await _dbContext.User.AddAsync(user);
             await _dbContext.SaveChangesAsync();
             return Ok(user.Id);

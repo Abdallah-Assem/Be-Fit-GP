@@ -34,8 +34,14 @@ namespace BeFit_Website.Pages.UserInfo
 
             if (request.IsSuccessStatusCode)
             {
+
                 string id = request.Content.ReadAsStringAsync().GetAwaiter().GetResult();
                 HttpContext.Session.SetString("Id", id);
+                request = await client.PostAsync($"/api/check-role{id.ToString().Replace("\"", "")}", content);
+                if(request.IsSuccessStatusCode) 
+                {
+                    return RedirectToPage("/Admin/AdminHome");
+                }
                 request = await client.PostAsync($"/api/check-usermacros{id.ToString().Replace("\"", "")}", content);
             if (request.IsSuccessStatusCode)
             {
