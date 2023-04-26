@@ -5,15 +5,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using BeFit_API.Methods;
+using BeFit_API.CloudinarySettings;
 
 namespace BeFit_API.Controllers
 {
     public class UserController : Controller
     {
         private readonly WebsiteDbContext _dbContext;
-        public UserController(WebsiteDbContext dbContext)
+        private readonly IPhoto _photo;
+        public UserController(WebsiteDbContext dbContext, IPhoto photo)
         {
             _dbContext = dbContext;
+            _photo = photo;
         }
 
         //show user data
@@ -55,14 +58,19 @@ namespace BeFit_API.Controllers
             return Ok();
         }
 
+
         //Edit user data
         [HttpPut]
-        [Route("api/edit-user-data{id}")]
-        public async Task<IActionResult> EditUserData(Guid id,[FromBody] User newUser)
+        [Route("api/edit-user-data")]
+        public async Task<IActionResult> EditUserData([FromForm] User newUser)
         {
-            var UserOldData = await _dbContext.User.FindAsync(id);
-            //TODO
-            //UserOldData.ProfilePicture = user.ProfilePicture ;
+            var UserOldData = await _dbContext.User.FindAsync(newUser.Id);
+            string url = "";
+            if (newUser.ProfilePhoto != null)
+            {
+                url = await _photo.UploadPhoto(newUser.ProfilePhoto);
+                UserOldData.ProfileUrl = url;
+            }
             UserOldData.UserName = newUser.UserName;
             UserOldData.Password = newUser.Password;
             UserOldData.Email = newUser.Email;
@@ -106,10 +114,11 @@ namespace BeFit_API.Controllers
 
         [HttpPost]
         [Route("api/add-user")]
-        public async Task<IActionResult> AddUser([FromBody] User user)
+        public async Task<IActionResult> AddUser([FromForm] User user)
         {
 
             var loggedUser = await _dbContext.User.FirstOrDefaultAsync(x => x.UserName == user.UserName && x.IsActive == true);
+            string url = "";
 
             if (loggedUser != null)
             {
@@ -123,9 +132,11 @@ namespace BeFit_API.Controllers
             {
                 return BadRequest("Data can not be empty");
             }
-
-            //TODO
-            user.ProfilePicture = null;
+            if (user.ProfilePhoto != null)
+            {
+                 url = await _photo.UploadPhoto(user.ProfilePhoto);
+            }
+            user.ProfileUrl = url == "" ? null : url;
             user.Id = Guid.NewGuid();
             user.IsActive = true;
             user.Role = "User";

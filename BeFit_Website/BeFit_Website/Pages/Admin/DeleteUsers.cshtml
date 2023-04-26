@@ -1,6 +1,27 @@
 ﻿@page
 @model BeFit_Website.Pages.Admin.DeleteUsersModel
 @{
+    <head>
+        <style>
+                table {
+                    font-family: arial, sans-serif;
+                    border-collapse: collapse;
+                    width: 70%;
+                    position: center;
+                    margin-left: 10%
+                }
+
+                td, th {
+                    border: 1px solid #dddddd;
+                    text-align: left;
+                    padding: 8px;
+                }
+
+                tr:nth-child(even) {
+                    background-color: #dddddd;
+                }
+        </style>
+    </head>
     <h1> Users</h1>
     <table class="table table-bordered table-striped" >
         <thead>
@@ -17,7 +38,7 @@
                 <tr>
                     <td>@obj.UserName</td>
                     <td>@obj.Email</td>
-                    <td>@obj.ProfilePicture</td>
+                    <td><img src="@obj.ProfileUrl" style="border: 2px solid black" width="100px" height="100px"></td>
                     <td>@obj.IsActive</td>
                     <td>
                     <form method="post">

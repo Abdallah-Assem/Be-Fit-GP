@@ -18,7 +18,7 @@ namespace BeFit_API.Migrations
                 .WithColumn("UserName").AsString().NotNullable().Unique()
                 .WithColumn("Password").AsString().NotNullable()
                 .WithColumn("Email").AsString().NotNullable().Unique()
-                .WithColumn("ProfilePicture").AsString().Nullable()
+                .WithColumn("ProfileUrl").AsString().Nullable()
                 .WithColumn("Role").AsString().NotNullable()
                 .WithColumn("IsActive").AsBoolean().NotNullable();
         }

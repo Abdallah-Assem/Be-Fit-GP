@@ -11,5 +11,6 @@ namespace BeFit_API.Data
         public DbSet<User> User { get; set; }
         public DbSet<SelectedFood> SelectedFood { get; set; }
         public DbSet<SpecialFood> SpecialFood { get; set; }
+        public DbSet<Feedback> Feedback { get; set; }
     }
 }

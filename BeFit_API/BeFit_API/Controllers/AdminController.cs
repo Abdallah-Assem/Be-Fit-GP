@@ -44,9 +44,7 @@ namespace BeFit_API.Controllers
             {
                 return BadRequest("Data can not be empty");
             }
-
-            //TODO
-            user.ProfilePicture = null;
+            
             user.Id = Guid.NewGuid();
             user.IsActive = true;
             user.Role = "Admin";
@@ -65,9 +63,9 @@ namespace BeFit_API.Controllers
         [Route("api/delete-user/{id}")]
         public async Task<IActionResult> DeleteUser(Guid id)
         {
-            var UserOldData = await _dbContext.User.FindAsync(id);
+            var deletedUser = await _dbContext.User.FindAsync(id);
             
-            UserOldData.IsActive = false;
+            deletedUser.IsActive = false;
 
             await _dbContext.SaveChangesAsync();
             return Ok();

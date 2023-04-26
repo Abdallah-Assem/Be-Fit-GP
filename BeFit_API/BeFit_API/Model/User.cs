@@ -1,4 +1,6 @@
-﻿namespace BeFit_API.Model
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace BeFit_API.Model
 {
     public class User
     {
@@ -6,8 +8,10 @@
         public string UserName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        public string? ProfilePicture { get; set; } = string.Empty;
         public string Role { get; set; } = string.Empty;
+        public string? ProfileUrl { get; set; } = string.Empty;
+        [NotMapped]
+        public IFormFile? ProfilePhoto { get; set; }
         public bool IsActive { get; set;}
         
     }

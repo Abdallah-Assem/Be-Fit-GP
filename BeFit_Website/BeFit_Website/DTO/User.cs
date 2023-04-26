@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Serialization;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BeFit_Website.DTO
 {
@@ -8,7 +9,9 @@ namespace BeFit_Website.DTO
         public string UserName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        public string? ProfilePicture { get; set; } = string.Empty;
+        public string? ProfileUrl { get; set; }
+        [NotMapped]
+        public IFormFile? ProfilePhoto { get; set; }
         public string Role { get; set; } = string.Empty;
         public bool IsActive { get; set; }
     }

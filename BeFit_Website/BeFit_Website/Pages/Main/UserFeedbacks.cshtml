@@ -1,0 +1,126 @@
+﻿@page
+@model BeFit_Website.Pages.Main.UserFeedbacksModel
+@{
+    <head>
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 70%;
+                position: center;
+                margin-left: 10%
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+
+            .container {
+                width: 500px;
+                overflow: hidden;
+                /*background: #fff;*/
+                border-radius: 10px;
+                box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+                margin: auto;
+            }
+            .post header {
+                font-size: 22px;
+                font-weight: 600;
+                text-align: center;
+                padding: 17px 0;
+                border-bottom: 1px solid #bfbfbf;
+            }
+            .post form{
+                margin: 20px 25px;
+            }
+            .post form .content{
+                display: flex;
+                align-items: center;
+            }            
+            .post form .content img{
+                max-width: 52px;
+            }
+            .post form .content .details{
+                margin: -3px 0 0 12px;
+            }
+
+            form :where(input, button) {
+                width: 100%;
+                outline: none;
+                border: none;
+            }
+
+            form input {
+                resize: none;
+                font-size: 18px;
+                margin-top: 5px;
+                min-height: 100px;
+            }
+
+            form button {
+                height: 53px;
+                color: #fff;
+                font-size: 18px;
+                font-weight: 500;
+                cursor: pointer;
+                color: #BCC0C4;
+                border-radius: 7px;
+                background: #e2e5e9;
+                transition: all 0.3s ease;
+            }
+
+            form  button {
+                color: #fff;
+                background: #4599FF;
+            }
+
+                form  button:hover {
+                    background: #1a81ff;
+                }
+        </style>
+    </head>
+    <body>
+            <div class="container">
+                <div class="wrapper">
+                    <section class="post">
+                    <header>Add your Feedback</header>
+                    <form method="post" class="align-content-center col-6 w-25" enctype="multipart/form-data">
+                        <div class="content">
+                            <img src="@Model.user.ProfileUrl" style="border-radius: 50%">
+                            <div class="details">
+                                 <p>@Model.user.UserName</p>                       
+                            </div>
+                        </div>
+                        <input asp-for="Feedback.Message" placeholder="your feedback is important to us 💖" required>
+                        <button type="submit" asp-page-handler="AddFeedback">Post</button>
+                    </form>
+                </div>
+            </div>
+            @foreach (var obj in Model.feedbackList)
+            {
+                <div class="container">
+                    <div class="wrapper">
+                        <section class="post">
+                        <form>
+                    <div class="content">
+                        <img src="@obj.FeedbackUser.ProfileUrl" style="border-radius: 50%">
+                            <div class="details">
+                                <p>@obj.FeedbackUser.UserName</p> 
+                                <p>@obj.TimeCreated</p>
+                            </div>
+                        </div>
+                        <input asp-for="@obj.Message" readonly="true">
+                        </form>
+                    </div>
+                </div>
+
+        }
+
+    </body>
+}

@@ -14,6 +14,14 @@
             <input asp-for="user.Password" class="form-control"  required>
             <label class="form-label">Password</label>
         </div>
+        <br>
+        <div class="form-floating form-outline mb-4">
+            <img src="@Model.user.ProfileUrl" style="border: 2px solid black" width="100px" height="100px">
+            <br>
+            <input asp-for="user.ProfilePhoto" class="form-control" type="file">
+            <label class="form-label">Photo</label>
+            <span asp-validation-for="user.ProfilePhoto" class="text-danger"></span>
+        </div>
     <button type="submit" class="btn btn-success btn-block mb-3"><i class="bi bi-patch-plus"> Edit</i></button>
     <div class="text-center">
             <p style="color:#000000">Wanna Edit Macros? <a class="" asp-page="/UserInfo/EditUserMacros">Edit Macros</a></p>
