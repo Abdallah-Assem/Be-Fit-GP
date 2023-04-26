@@ -62,7 +62,9 @@
                 margin-top: 5px;
                 min-height: 100px;
             }
-
+            .delete {
+                width: 10%;
+            }
             form button {
                 height: 53px;
                 color: #fff;
@@ -79,10 +81,9 @@
                 color: #fff;
                 background: #4599FF;
             }
-
-                form  button:hover {
-                    background: #1a81ff;
-                }
+            form  button:hover {
+                background: #1a81ff;
+            }
         </style>
     </head>
     <body>
@@ -104,7 +105,15 @@
             </div>
             @foreach (var obj in Model.feedbackList)
             {
-                <div class="container">
+            <div class="container">
+                @{
+                    if (obj.UserId.ToString() == HttpContext.Session.GetString("Id").Replace("\"", ""))
+                {
+                        <form method="post" class="align-content-center col-6 w-25" enctype="multipart/form-data">
+                            <button class="delete" type="submit" asp-page-handler="DeleteFeedback" asp-route-itemid=@obj.Id>❌</button>
+                        </form>
+                }
+                }
                     <div class="wrapper">
                         <section class="post">
                         <form>
