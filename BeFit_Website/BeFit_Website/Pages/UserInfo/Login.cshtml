@@ -1,70 +1,39 @@
 ﻿@page
 @model BeFit_Website.Pages.UserInfo.LoginModel
 @{
-    <head>
-        <meta name="viewport" content="width=device-width"/>
-        <title>_Login</title>
-        <link rel="stylesheet" href="~/css/Login.css" />
-    <script src="https://kit.fontawesome.com/37b656b940.js"
-            crossorigin="anonymous"></script>
-    </head>
-<form method="post" class="" style="" enctype="multipart/form-data">
-    <div class="container">
-      <div class="screen">
-        <div class="screen__content">
-          <div class="row justify-content-md-center login">
-          <h1 class="tilte">Login</h1>
-            <div class="col-md-4">
-              <div class="card">
-                <div class="card-body">
-                    <i class="fas fa-user"></i>
-                    <input
-                      asp-for="user.UserName"
-                      placeholder="User Name"
-                      class="login__input "
-                      required
-                    />
-                </div>
-                    <div>
-                        <br>
-                        <span
-                          asp-validation-for="user.UserName" class="text-danger" style="color:red"></span>
-                        <br>
-                    </div>
-                    <i class="fas fa-lock"></i>
-                    <input
-                      asp-for="user.Password"
-                      placeholder="Password"
-                      type="password"
-                      class="login__input "
-                      required
-                    />
-                    <div>
-                        <br>
-                        <span asp-validation-for="user.Password" class="text-danger" style="color:red"></span>
-                        <br>
-                    </div>
-              </div>
-            </div>
-          </div>
-                <div class="form-group">
-                    <input type="submit"
-                           name="submit"
-                           class="button login__submit"
-                           value="Login" />
-                </div>
-          <div class="social-login">
-            <h5>Don't have an account?'</h5>
-            <br />
-            <h3>
-              <a class="" asp-page="/UserInfo/SignUp">Sign Up Now!</a>
-            </h3>
-          </div>
-      </div>
-          
-        </div>
-    </div>
-</form>
+    <link href="~/css/login.css" rel="stylesheet" />
+
+	<div class="container" id="container">
+		<div class="form-container sign-in-container">
+			<form method="post"  enctype="multipart/form-data">
+				<h1>Log in</h1>
+                <div class="social-container">
+					<img src="~/photos/be-fit5.png" width="80" draggable="false" />
+				</div>
+
+				<input asp-for="user.UserName" placeholder="User Name" required />
+				<span asp-validation-for="user.UserName" class="text-danger" style="color:red"></span>
+				<input asp-for="user.Password" placeholder="Password" type="password" required />
+				<span asp-validation-for="user.Password" class="text-danger" style="color:red"></span>
+
+				<button type="submit">
+					Sign in
+				</button>
+			</form>
+		</div>
+		<div class="overlay-container">
+			<div class="overlay">
+				<div class="overlay-panel overlay-left">
+				</div>
+				<div class="overlay-panel overlay-right">
+					<h1>Hello, Friend!</h1>
+					<p>If this is your first time to join us then please let us know more about you!</p>
+					<a asp-page="/UserInfo/SignUp"><button class="button2"> Sign up</button></a>
+
+				</div>
+			</div>
+		</div>
+	</div>
 
 }
 @section Scripts{

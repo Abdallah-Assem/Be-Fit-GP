@@ -66,6 +66,13 @@ namespace BeFit_API.Controllers
             var deletedUser = await _dbContext.User.FindAsync(id);
             
             deletedUser.IsActive = false;
+            
+            var feedbacks = await _dbContext.Feedback.Where(x => x.UserId == id && x.IsActive == true).ToListAsync();
+
+            foreach (var feedback in feedbacks)
+            {
+                feedback.IsActive = false;
+            }
 
             await _dbContext.SaveChangesAsync();
             return Ok();
