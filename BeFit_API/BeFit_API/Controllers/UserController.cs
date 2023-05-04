@@ -114,63 +114,43 @@ namespace BeFit_API.Controllers
 
         [HttpPost]
         [Route("api/add-user")]
-        public async Task<IActionResult> AddUser([FromForm] User user)
+        public async Task<IActionResult> AddUser([FromBody] CombineUser_UserMacros User_UserMacros)
         {
 
-            var loggedUser = await _dbContext.User.FirstOrDefaultAsync(x => x.UserName == user.UserName && x.IsActive == true);
-            string url = "";
+            var loggedUser = await _dbContext.User.FirstOrDefaultAsync(x => x.UserName == User_UserMacros.CombinedUser.UserName && x.IsActive == true);
 
             if (loggedUser != null)
             {
                 return BadRequest("User Already Exists");
             }
             if (
-                string.IsNullOrEmpty(user.UserName)
-                && string.IsNullOrEmpty(user.Email)
-                && string.IsNullOrEmpty(user.Password)
+                string.IsNullOrEmpty(User_UserMacros.CombinedUser.UserName)
+                && string.IsNullOrEmpty(User_UserMacros.CombinedUser.Email)
+                && string.IsNullOrEmpty(User_UserMacros.CombinedUser.Password)
+                && string.IsNullOrEmpty(User_UserMacros.CombinedUserMacros.Goal)
+                && User_UserMacros.CombinedUserMacros.Height <= 0
+                && User_UserMacros.CombinedUserMacros.Weight <= 0
+                && User_UserMacros.CombinedUserMacros.Age <= 0
+                && string.IsNullOrEmpty(User_UserMacros.CombinedUserMacros.Gender)
+                && string.IsNullOrEmpty(User_UserMacros.CombinedUserMacros.ActivityLevel)
                 )
             {
                 return BadRequest("Data can not be empty");
             }
-            if (user.ProfilePhoto != null)
-            {
-                 url = await _photo.UploadPhoto(user.ProfilePhoto);
-            }
-            user.ProfileUrl = url == "" ? null : url;
-            user.Id = Guid.NewGuid();
-            user.IsActive = true;
-            user.Role = "User";
-            await _dbContext.User.AddAsync(user);
-            await _dbContext.SaveChangesAsync();
-            return Ok(user.Id);
-        }
 
-        //add macros to user
+            User_UserMacros.CombinedUser.Id = Guid.NewGuid();
+            User_UserMacros.CombinedUserMacros.UserId = User_UserMacros.CombinedUser.Id;
+            User_UserMacros.CombinedUser.IsActive = true;
+            User_UserMacros.CombinedUser.Role = "User";
+            User_UserMacros.CombinedUserMacros.IsActive = true;
+            User_UserMacros.CombinedUserMacros.Id = Guid.NewGuid();
+            CalcMacros calc = new CalcMacros();
+            calc.Calculate(User_UserMacros.CombinedUserMacros);
 
-        [HttpPost]
-        [Route("api/add-user-macros")]
-        public async Task<IActionResult> AddUserMacros ([FromBody] UserMacros userMacros)
-        {
-            if (
-                string.IsNullOrEmpty(userMacros.Goal)
-                && userMacros.UserId == Guid.Empty 
-                && userMacros.Height <= 0 
-                && userMacros.Weight <= 0 
-                && userMacros.Age <= 0
-                && string.IsNullOrEmpty(userMacros.Gender)
-                && string.IsNullOrEmpty(userMacros.ActivityLevel)
-                )
-            {
-                return BadRequest("Data can not be empty");
-            }
-            userMacros.IsActive = true;
-            userMacros.Id= Guid.NewGuid();
-            CalcMacros calc = new CalcMacros(); 
-            calc.Calculate(userMacros);
-            
-            await _dbContext.UserMacros.AddAsync(userMacros);
+            await _dbContext.User.AddAsync(User_UserMacros.CombinedUser);
+            await _dbContext.UserMacros.AddAsync(User_UserMacros.CombinedUserMacros);
             await _dbContext.SaveChangesAsync();
-            return Ok();
+            return Ok(User_UserMacros.CombinedUser.Id);
         }
     }
 }

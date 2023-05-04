@@ -11,11 +11,10 @@
 					<img src="~/photos/be-fit5.png" width="80" draggable="false" />
 				</div>
 
-				<input asp-for="user.UserName" placeholder="User Name" required />
-				<span asp-validation-for="user.UserName" class="text-danger" style="color:red"></span>
-				<input asp-for="user.Password" placeholder="Password" type="password" required />
-				<span asp-validation-for="user.Password" class="text-danger" style="color:red"></span>
-
+				<input asp-for="user.UserName" placeholder="User Name" />
+				<span asp-validation-for="user.UserName" class="text-danger" style="color:#aa0909"></span>
+				<input asp-for="user.Password" placeholder="Password" type="password" />
+				<span asp-validation-for="user.Password" class="text-danger" style="color:#aa0909"></span>
 				<button type="submit">
 					Sign in
 				</button>

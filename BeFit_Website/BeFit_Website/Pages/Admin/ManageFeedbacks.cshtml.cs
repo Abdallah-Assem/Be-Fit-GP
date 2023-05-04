@@ -2,16 +2,15 @@ using BeFit_Website.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
-using System.Text;
 
-namespace BeFit_Website.Pages.Main
+namespace BeFit_Website.Pages.Admin
 {
-    public class UserFeedbacksModel : PageModel
+    public class ManageFeedbacksModel : PageModel
     {
         IConfiguration config = new ConfigurationBuilder()
-           .AddJsonFile("appsettings.json")
-           .AddEnvironmentVariables()
-           .Build();
+          .AddJsonFile("appsettings.json")
+          .AddEnvironmentVariables()
+          .Build();
         public List<GetFeedback> feedbackList { get; set; } = new();
         public Feedback Feedback { get; set; } = new();
         public User user { get; set; } = new();
@@ -21,7 +20,7 @@ namespace BeFit_Website.Pages.Main
             var httpClient = HttpContext.RequestServices.GetService<IHttpClientFactory>();
             var client = httpClient.CreateClient();
             client.BaseAddress = new Uri(config["BaseAddress"]);
-            var request = await client.GetStringAsync("api/get-feedbacks-for-user");
+            var request = await client.GetStringAsync("api/get-feedbacks-for-admin");
 
             if (request != null)
             {
@@ -35,25 +34,6 @@ namespace BeFit_Website.Pages.Main
                 var stringData = request2.Content.ReadAsStringAsync().Result;
                 user = JsonConvert.DeserializeObject<User>(stringData);
             }
-            
-        }
-
-        public async Task<IActionResult> OnPostAddFeedback(Feedback feedback)
-        {
-            var currentUser = HttpContext.Session.GetString("Id");
-            feedback.UserId = Guid.Parse(currentUser.ToString().Replace("\"", ""));
-            var httpClient = HttpContext.RequestServices.GetService<IHttpClientFactory>();
-            var client = httpClient.CreateClient();
-            client.BaseAddress = new Uri(config["BaseAddress"]);
-            var jsoncategory = JsonConvert.SerializeObject(feedback);
-            var content = new StringContent(jsoncategory, Encoding.UTF8, "application/json");
-            var request = await client.PostAsync("/api/add-feedback", content);
-            if (request.IsSuccessStatusCode)
-            {
-
-                return RedirectToPage("");
-            }
-            return new NoContentResult();
         }
         public async Task<IActionResult> OnPostDeleteFeedback(Guid itemid)
         {
@@ -61,6 +41,18 @@ namespace BeFit_Website.Pages.Main
             var client = httpClient.CreateClient();
             client.BaseAddress = new Uri(config["BaseAddress"]);
             var request = await client.GetAsync("/api/delete-feedback/" + itemid);
+            if (request.IsSuccessStatusCode)
+            {
+                return RedirectToPage("");
+            }
+            return new NoContentResult();
+        }
+        public async Task<IActionResult> OnPostApproveFeedback(Guid itemid)
+        {
+            var httpClient = HttpContext.RequestServices.GetService<IHttpClientFactory>();
+            var client = httpClient.CreateClient();
+            client.BaseAddress = new Uri(config["BaseAddress"]);
+            var request = await client.GetAsync("/api/approve-feedback/" + itemid);
             if (request.IsSuccessStatusCode)
             {
                 return RedirectToPage("");

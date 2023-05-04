@@ -18,6 +18,7 @@ namespace BeFit_API.Migrations
                 .WithColumn("UserId").AsGuid().ForeignKey("User", "Id")
                 .WithColumn("Message").AsString().NotNullable()
                 .WithColumn("TimeCreated").AsDateTime().NotNullable()
+                .WithColumn("Approved").AsBoolean().NotNullable()
                 .WithColumn("IsActive").AsBoolean().NotNullable();
         }
     }

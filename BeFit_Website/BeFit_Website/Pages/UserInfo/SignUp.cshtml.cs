@@ -20,19 +20,19 @@ namespace BeFit_Website.Pages.UserInfo
         [TempData]
         public string Status { get; set; } = String.Empty;
         public User user { get; set; } = new();
+        public UserMacros userMacros { get; set; } = new();
+        public CombineUser_UserMacros User_UserMacros { get; set; } = new();
         
         public void OnGet() { }
-        public async Task<IActionResult> OnPost(User user)
+        public async Task<IActionResult> OnPostAddUser(CombineUser_UserMacros User_UserMacros)
         {
 
                 var httpClient = HttpContext.RequestServices.GetService<IHttpClientFactory>();
                 var client = httpClient.CreateClient();
                 client.BaseAddress = new Uri(config["BaseAddress"]);
-                var jsoncategory = JsonConvert.SerializeObject(user);
-                var formData = new MultipartFormDataContent();
-                formData = await MappingContent(formData, user);
-                //var content = new StringContent(jsoncategory, Encoding.UTF8, "application/json");
-                var request = await client.PostAsync("/api/add-user", formData);
+                var jsoncategory = JsonConvert.SerializeObject(User_UserMacros);
+                var content = new StringContent(jsoncategory, Encoding.UTF8, "application/json");
+                var request = await client.PostAsync("/api/add-user", content);
             
             if (request.IsSuccessStatusCode)
             {
@@ -40,28 +40,13 @@ namespace BeFit_Website.Pages.UserInfo
                 HttpContext.Session.SetString("Id", id);
                 
                 
-                return RedirectToPage("/UserInfo/UserMacros");
+                return RedirectToPage("/Main/Home");
+                //return new NoContentResult();
             }
             Msg = "User Already Exists";
             Status = "error";
             RedirectToPage("");
             return Page();
-        }
-        private async Task<MultipartFormDataContent> MappingContent(MultipartFormDataContent multipartFormDataContent, User user)
-        {
-            multipartFormDataContent.Add(new StringContent(user.Id.ToString(), Encoding.UTF8, MediaTypeNames.Text.Plain), "Id");
-            multipartFormDataContent.Add(new StringContent(user.UserName, Encoding.UTF8, MediaTypeNames.Text.Plain), "UserName");
-            multipartFormDataContent.Add(new StringContent(user.Email, Encoding.UTF8, MediaTypeNames.Text.Plain), "Email");
-            multipartFormDataContent.Add(new StringContent(user.Password, Encoding.UTF8, MediaTypeNames.Text.Plain), "Password");
-            
-            if (user.ProfilePhoto != null)
-            {
-                
-                    var fileContent = new StreamContent(user.ProfilePhoto.OpenReadStream());
-                    fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse(user.ProfilePhoto.ContentType);
-                    multipartFormDataContent.Add(fileContent, "ProfilePhoto", user.ProfilePhoto.FileName);
-            }
-            return multipartFormDataContent;
         }
     }
 }
