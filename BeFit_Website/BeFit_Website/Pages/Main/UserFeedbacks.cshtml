@@ -1,117 +1,83 @@
 ﻿@page
 @model BeFit_Website.Pages.Main.UserFeedbacksModel
 @{
-    <head>
-        <style>
-            .container {
-                width: 500px;
-                overflow: hidden;
-                /*background: #fff;*/
-                border-radius: 10px;
-                box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
-                margin: auto;
-            }
-            .post header {
-                font-size: 22px;
-                font-weight: 600;
-                text-align: center;
-                padding: 17px 0;
-                border-bottom: 1px solid #bfbfbf;
-            }
-            .post form{
-                margin: 20px 25px;
-            }
-            .post form .content{
-                display: flex;
-                align-items: center;
-            }            
-            .post form .content img{
-                max-width: 52px;
-            }
-            .post form .content .details{
-                margin: -3px 0 0 12px;
-            }
+    <link href="~/css/userfeedbacks.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/photos/4.png" width="80" draggable="false" /></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            form :where(input, button) {
-                width: 100%;
-                outline: none;
-                border: none;
-            }
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" asp-page="/Main/Home">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
 
-            form input {
-                resize: none;
-                font-size: 18px;
-                margin-top: 5px;
-                min-height: 100px;
-            }
-            .delete {
-                width: 10%;
-            }
-            form button {
-                height: 53px;
-                color: #fff;
-                font-size: 18px;
-                font-weight: 500;
-                cursor: pointer;
-                color: #BCC0C4;
-                border-radius: 7px;
-                background: #e2e5e9;
-                transition: all 0.3s ease;
-            }
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Profile</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" asp-page="/UserInfo/EditUserData">Edit Profile</a>
 
-            form  button {
-                color: #fff;
-                background: #4599FF;
-            }
-            form  button:hover {
-                background: #1a81ff;
-            }
-        </style>
-    </head>
-    <body>
-            <div class="container">
-                <div class="wrapper">
-                    <section class="post">
-                    <header>Add your Feedback</header>
-                    <form method="post" class="align-content-center col-6 w-25" enctype="multipart/form-data">
-                        <div class="content">
-                            <img src="@Model.user.ProfileUrl" style="border-radius: 50%">
-                            <div class="details">
-                                 <p>@Model.user.UserName</p>                       
-                            </div>
+                        <a class="dropdown-item" asp-page="/Main/UserFeedbacks">feedback</a>
+                        <a class="dropdown-item" asp-page="/UserInfo/Login">Log out</a>
+
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+    <div class="feedback-container">
+        <div class="feedback-wrapper">
+            <section class="feedback-post" style="margin-top:100px;">
+                <header>Add your Feedback</header>
+                <form method="post" class="feedback-form" id="feedback-form" enctype="multipart/form-data">
+                    <div class="feedback-content">
+                        <img src="@Model.user.ProfileUrl" style="border-radius: 50%">
+                        <div class="feedback-details">
+                            <p>@Model.user.UserName</p>
+                            <p id="datetime"></p>
                         </div>
-                        <input asp-for="Feedback.Message" placeholder="your feedback is important to us 💖" required>
-                        <button type="submit" asp-page-handler="AddFeedback">Post</button>
-                    </form>
-                </div>
-            </div>
-            @foreach (var obj in Model.feedbackList)
-            {
-            <div class="container">
-                @{
-                    if (obj.UserId.ToString() == HttpContext.Session.GetString("Id").Replace("\"", ""))
+                    </div>
+                    <input asp-for="Feedback.Message" placeholder="your feedback is important to us 💖" required>
+                    <button type="submit" asp-page-handler="AddFeedback" id="post-button" class="Post-button">Post</button>
+                </form>
+        </div>
+    </div>
+    @foreach (var obj in Model.feedbackList)
+    {
+        <div class="feedback-container">
+            @{
+                if (obj.UserId.ToString() == HttpContext.Session.GetString("Id").Replace("\"", ""))
                 {
-                        <form method="post" class="align-content-center col-6 w-25" enctype="multipart/form-data">
-                            <button class="delete" type="submit" asp-page-handler="DeleteFeedback" asp-route-itemid=@obj.Id>❌</button>
-                        </form>
+                    <form method="post" class="feedback-form" enctype="multipart/form-data">
+                        <button class="delete" type="submit" asp-page-handler="DeleteFeedback" asp-route-itemid=@obj.Id>✖️</button>
+                    </form>
                 }
-                }
-                    <div class="wrapper">
-                        <section class="post">
-                        <form>
-                    <div class="content">
-                        <img src="@obj.FeedbackUser.ProfileUrl" style="border-radius: 50%">
-                            <div class="details">
-                                <p>@obj.FeedbackUser.UserName</p> 
+            }
+            <div class="feedback-wrapper">
+                <section class="feedback-post">
+                    <form class="feedback-form">
+                        <div class="feedback-content">
+                            <img src="@obj.FeedbackUser.ProfileUrl" style="border-radius: 50%">
+                            <div class="feedback-details">
+                                <p>@obj.FeedbackUser.UserName</p>
                                 <p>@obj.TimeCreated</p>
                             </div>
                         </div>
-                        <input asp-for="@obj.Message" readonly="true">
-                        </form>
-                    </div>
-                </div>
+                        <input type="text" asp-for="@obj.Message" readonly="true">
+                    </form>
+            </div>
+        </div>
+                  }
 
-        }
-
-    </body>
 }
+<script src="~/js/userfeedbacks.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+<script src="~/js/bootstrap.bundle.min.js"></script>
