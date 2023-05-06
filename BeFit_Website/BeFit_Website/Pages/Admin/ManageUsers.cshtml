@@ -1,0 +1,70 @@
+﻿@page
+@model BeFit_Website.Pages.Admin.ManageUsersModel
+@{
+    <link href="~/css/manageusers.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/photos/4.png" width="80" draggable="false" /></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link btn btn-dark" asp-page="/Admin/ManageUsers">Manage Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-dark" asp-page="/Admin/ManageFeedbacks">Manage Feedbacks</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-dark" asp-page="/UserInfo/Login">Log out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div style="margin-bottom:80px;"></div>
+    <div class="container-fluid mt-5">
+          <div class="row">
+            <div class="col-12">
+              <div class="container-fluid mt-5" style="margin-top: 70px;">
+
+              <h1>Manage Users</h1>
+            </div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>UserName</th>
+                <th>Email</th>
+                <th>Profile Picture</th>
+                <th>Is Active</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach (var obj in Model.usersList)
+              {
+              <tr>
+                <td class="username-cell">@obj.UserName</td>
+                <td class="email-cell">@obj.Email</td>
+                <td class="profile-picture-cell"><img class="userImg" src="@obj.ProfileUrl" alt="None"></td>
+                <td>@obj.IsActive</td>
+                <td>
+                  <form method="post">
+                  <button class="delete" type="submit" asp-page-handler="DeleteUser" asp-route-itemid=@obj.Id><i class="fas fa-trash"></i>Delete</button>
+                  </form>
+                </td>
+                <td>
+                  <form method="post">
+                    <button class="restore" type="submit" asp-page-handler="RestoreUser" asp-route-itemid=@obj.Id><i class="fas fa-undo">Restore</i></button>
+                  </form>
+                </td>
+              </tr>
+            }
+            </tbody>
+          </table>
+        </div>
+    </div>
+}
