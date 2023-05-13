@@ -1,134 +1,174 @@
 ﻿@page
 @model BeFit_Website.Pages.FoodInfo.SearchForFoodModel
 @{
-    <head>
-        <link rel="stylesheet" href="~/css/SearchForFood.css" />
-    </head>
-    <form method="post" class="align-content-center col-6 w-25" style="margin:auto;text-align:center;color:#1A2238;" enctype="multipart/form-data">
-        <div class="form-floating form-outline mb-4">
-            <input asp-for="food.name" class="form-control"  required>
-            <label class="form-label">Search a food by Name only.</label>
-        </div>
-        <button type="submit" asp-page-handler="Search" class="btn btn-success btn-block mb-3"><i class="bi bi-patch-plus"> Search 🔍</i></button>
-        <div class="text-center">
-            <p style="color:#000000">Create your own Food. <a class="" asp-page="/FoodInfo/SpecialFood">Create..</a></p>
-        </div>
-    <div class="form-floating form-outline mb-4" id="Searched-Food-Container">
-        @if (!string.IsNullOrEmpty(Model.food.name))
-        {
-            <div>
-                <table>
-                    <tr>
-                        <th>Name</th>
-                        <th>Calories</th>
-                        <th>Total Fats(g)</th>
-                        <th>Saturated Fats(g)</th>
-                        <th>Protein(g)</th>
-                        <th>Sodium(mg)</th>
-                        <th>Potassium(mg)</th>
-                        <th>Cholesterol(mg)</th>
-                        <th>Carbs(g)</th>
-                        <th>Fiber(g)</th>
-                        <th>Sugar(g)</th>
-                    </tr>
-                    <tr>
-                        <td>@Model.food.name</td>
-                        <td>@Model.food.calories</td>
-                        <td>@Model.food.fat_total_g</td>
-                        <td>@Model.food.fat_saturated_g</td>
-                        <td>@Model.food.protein_g</td>
-                        <td>@Model.food.sodium_mg</td>
-                        <td>@Model.food.potassium_mg</td>
-                        <td>@Model.food.cholesterol_mg</td>
-                        <td>@Model.food.carbohydrates_total_g</td>
-                        <td>@Model.food.fiber_g</td>
-                        <td>@Model.food.sugar_g</td>
-                        <td><button type="button"  class="show-PopUp btn btn-success btn-block mb-3"> Add ➕</button></td>
-                    </tr>
-                </table>
-            </div>      
-        }
-        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
-        {
-            <div>
-                <span>
-                    There were no results for your search.
-                    <br>
-                    <b>Suggestions:</b>
-                    <br>
-                    1- Make sure all words are spelled correctly.
-                    <br>
-                    2- Search by ingredient.
-                    <br>
-                    3- Try more general keywords like 'apple'.
-                </span>
-            </div>
-        }
-    </div>  
-    </form>
-    <form method="post" enctype="multipart/form-data">
-    <div class="PopUp hidden">
-        <button type="button" class="close-PopUp">&times;</button>
-        <h1>Details of food that u ate. </h1>
-        <div class="form-floating form-outline mb-4">
-            <label class="form-label">Quantity: </label>
-            <input asp-for="Food_SelectedFood.CombinedSelectedFood.Quantity" value="1" step="1" class="form-control" type="number" required>
-                <span asp-validation-for="Food_SelectedFood.CombinedSelectedFood.Quantity" class="text-danger"></span>
-        </div>
-        <div class="form-floating form-outline mb-4">
-            <label class="form-label">Weight (g):</label>
-                <input asp-for="Food_SelectedFood.CombinedSelectedFood.Weight" value="100" class="form-control" type="number" required>
-                <span asp-validation-for="Food_SelectedFood.CombinedSelectedFood.Weight" class="text-danger"></span>
-        </div>
-        <div>
-            <div class="input-group mb-3">
-                <label class="input-group-text">Meal</label>
-                    <select class="form-select" asp-for="Food_SelectedFood.CombinedSelectedFood.Meal" required>
-                    <option hidden></option>
-                    <option value="Breakfast">Breakfast</option>
-                    <option value="Lunch">Lunch</option>
-                    <option value="Dinner">Dinner</option>
-                    <option value="Snacks">Snacks</option>
-                </select>
-            </div>
-                <span asp-validation-for="Food_SelectedFood.CombinedSelectedFood.Meal" class="text-danger"></span>
-        </div>
-            <button type="submit" asp-page-handler="AddFood" class="btn btn-success btn-block mb-3"><i class="bi bi-patch-plus"> Add Food ➕</i></button>
-    </div>
-    <div class="overlay hidden"></div>
-    </form>
 
-   
+    <link href="~/css/searchforfood.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top" id="navColor">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/photos/4.png" width="80" draggable="false" /></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" asp-page="/Main/Home">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Profile</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" asp-page="/UserInfo/EditUserData">Edit Profile</a>
+
+                        <a class="dropdown-item" asp-page="/Main/UserFeedbacks">feedback</a>
+                        <a class="dropdown-item" asp-page="/UserInfo/Login">Log out</a>
+
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+    <div style="margin-bottom:90px;"></div>
+    <div class="main">
+
+            <div class="jumbotron" id="jumbotron">
+
+                <h1 class="display-4" id="display">Here you will find the details of food you ate!</h1>
+                <h4 >All info is after the food has been cooked.</h4> 
+                <hr class="my-4">
+                <h6>Let us share with you your meals!</h6>
+                <p class="lead">
+            <form method="post" class="form-inline" enctype="multipart/form-data">
+                <input asp-for="food.name" class="foorm2" type="search" placeholder="Search" aria-label="Search" required>
+                <button asp-page-handler="Search" class="btn btn-primary" id="searchBtn" type="submit">Search</button>
+            </form>
+            
+                  @if (!string.IsNullOrEmpty(Model.food.name))
+                  {      
+                        <div class="table-responsive" >
+                            <table class="table table-bordered" >
+                                <thead class=tableColor >
+                                  <tr >
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Calories</th>
+                                    <th scope="col">Total Fats(g)</th>
+                                    <th scope="col">Saturated Fats(g)</th>
+                                    <th scope="col">Protein(g)</th>
+                                    <th scope="col">Sodium(mg)</th>
+                                    <th scope="col">Pottassium(mg)</th>
+                                    <th scope="col">Cholesterol(mg)</th>
+                                    <th scope="col">Carbs(g)</th>
+                                    <th scope="col">Fiber(g)</th>
+                                    <th scope="col">Sugar(g)</th>
+                                  </tr>
+                                </thead>
+      
+                                <tbody >
+                                    <tr class="table-row" >
+                                      <td>@Model.food.name</td>
+                                      <td>@Model.food.calories</td>
+                                      <td>@Model.food.fat_total_g</td>
+                                      <td>@Model.food.fat_saturated_g</td>
+                                      <td>@Model.food.protein_g</td>
+                                      <td>@Model.food.sodium_mg</td>
+                                      <td>@Model.food.potassium_mg</td>
+                                      <td>@Model.food.cholesterol_mg</td>
+                                      <td>@Model.food.carbohydrates_total_g</td>
+                                      <td>@Model.food.fiber_g</td>
+                                      <td>@Model.food.sugar_g</td>
+                                      <td class="addbtn">
+                                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">
+                                        Add
+                                      </button></td>
+                                      </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                  } 
+                  @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                  {
+                    <div>
+                        <span>
+                            There were no results for your search.
+                            <br>
+                            <b>Suggestions:</b>
+                            <br>
+                            1- Make sure all words are spelled correctly.
+                            <br>
+                            2- Search by ingredient.
+                            <br>
+                            3- Try more general keywords like 'apple'.
+                        </span>
+                    </div>
+                  }
+
+                <div class="special">
+                    <h6>Or you can just add your special food from here..!</h6>
+                    <a asp-page="/FoodInfo/SpecialFood"> <button type="button" class="btn btn-dark btn-sm">Add special food</button></a>
+                </div>
+
+              
+              
+              <!-- Modal -->
+              
+                  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLongTitle">Details of food that you ate!</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <form method="post" enctype="multipart/form-data">
+                                    <div class="modal-body">
+                                        <div class="Quantity"> <label for="tentacles">Quantity:</label>
+                                            <input type="number" asp-for="Food_SelectedFood.CombinedSelectedFood.Quantity" value="1" step="1" required></div>
+                                            <span asp-validation-for="Food_SelectedFood.CombinedSelectedFood.Quantity" class="text-danger"></span>
+                                        <div class="Weight"><label for="tentacles">Weight(g):</label>
+                                            <input type="number"  asp-for="Food_SelectedFood.CombinedSelectedFood.Weight" value="100" required></div>
+                                            <span asp-validation-for="Food_SelectedFood.CombinedSelectedFood.Weight" class="text-danger"></span>
+                                         <div class="dropdown2">
+                                            <select asp-for="Food_SelectedFood.CombinedSelectedFood.Meal" required>
+                                                  <option value="" id="hover"selected="selected" hidden>Select Meal</option>
+                                                  <option value="Breakfast">Breakfast</option>
+                                                  <option value="Lunch">Lunch</option>
+                                                  <option value="Dinner">Dinner</option>
+                                                  <option value="Snacks">Snack</option>
+                                                </select></div>
+                                                <span asp-validation-for="Food_SelectedFood.CombinedSelectedFood.Meal" class="text-danger"></span>
+                                     <div class="modal-footer">
+                                        <button type="button"  class="btn btn-dark" data-dismiss="modal">Close</button>
+                                        <button type="submit" asp-page-handler="AddFood"  id="SaveBtn" class="btn btn-primary">Save </button>
+                                     </div>
+                                    </div>
+                              
+                                </form>
+                            </div>
+                        </div>
+                  </div>
+              
+                          
+
+                          
+            </div>
+             
+              
+
+    </div>
+            
     
 }
+            <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+            <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+            <script src="~/js/bootstrap.bundle.min.js"></script>
 @section Scripts{
     @{
         <partial name="_ValidationScriptsPartial" />
     }
 }
-<script>
-
-    const PopUp = document.querySelector('.PopUp');
-    const overlay = document.querySelector('.overlay');
-    const closePopUp = document.querySelector('.close-PopUp');
-    const showPopUp = document.querySelector('.show-PopUp');
-
-    function openPopUp() {
-        PopUp.classList.remove('hidden');
-        overlay.classList.remove('hidden');
-    }
-    function exitPopUp() {
-        PopUp.classList.add('hidden');
-        overlay.classList.add('hidden');
-    }
-    //make btns do their job
-    showPopUp.addEventListener('click', openPopUp);
-    //close the pop-up window by X btn
-    closePopUp.addEventListener('click', exitPopUp);
-    //close the pop-up window by clicking on page
-    overlay.addEventListener('click', exitPopUp);
-    //close the pop-up by escape on keyboard
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') exitPopUp();
-    });
-</script>

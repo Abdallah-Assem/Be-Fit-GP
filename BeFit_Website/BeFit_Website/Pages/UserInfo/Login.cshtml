@@ -6,7 +6,7 @@
 	<div class="container" id="container">
 		<div class="form-container sign-in-container">
 			<form method="post"  enctype="multipart/form-data">
-				<h1>Log in</h1>
+				<h1 class="h1Login">Log in</h1>
                 <div class="social-container">
 					<img src="~/photos/be-fit5.png" width="80" draggable="false" />
 				</div>
@@ -15,7 +15,7 @@
 				<span asp-validation-for="user.UserName" class="text-danger" style="color:#aa0909"></span>
 				<input asp-for="user.Password" placeholder="Password" type="password" />
 				<span asp-validation-for="user.Password" class="text-danger" style="color:#aa0909"></span>
-				<button type="submit">
+				<button class="button1" type="submit">
 					Sign in
 				</button>
 			</form>

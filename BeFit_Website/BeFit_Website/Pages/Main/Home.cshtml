@@ -1,6 +1,32 @@
 ﻿@page
 @model BeFit_Website.Pages.Main.HomeModel
 @{
+    // Retrieve data from the database
+    double usedCalories = Math.Ceiling(Model.userMacros.DailyCalories - Model.userMacrosDTO.RemainingDailyCalories);
+    double totalCalories = Model.userMacros.DailyCalories;
+    double usedCarbs = Math.Ceiling(Model.userMacros.DailyCarbs - Model.userMacrosDTO.RemainingDailyCarbs);
+    double totalCarbs = Model.userMacros.DailyCarbs;
+    double usedFats = Math.Ceiling(Model.userMacros.DailyFats - Model.userMacrosDTO.RemainingDailyFats);
+    double totalFats = Model.userMacros.DailyFats;
+    double usedProtein = Math.Ceiling(Model.userMacros.DailyProtein - Model.userMacrosDTO.RemainingDailyProtein);
+    double totalProtein = Model.userMacros.DailyProtein;
+
+    // Calculate the completion percentage
+    int usedCaloriesPercentage = (int)((double)usedCalories / totalCalories * 100);
+    int usedCarbsPercentage = (int)((double)usedCarbs / totalCarbs * 100);
+    int usedFatsPercentage = (int)((double)usedFats / totalFats * 100);
+    int usedProteinPercentage = (int)((double)usedProtein / totalProtein * 100);
+
+    // Set the style attribute of the progress bar
+    string progressCaloriesStyle = $"width: {usedCaloriesPercentage}%";
+    string progressCarbsStyle = $"width: {usedCarbsPercentage}%";
+    string progressFatsStyle = $"width: {usedFatsPercentage}%";
+    string progressProteinStyle = $"width: {usedProteinPercentage}%";
+    }
+@{
+
+    <link href="~/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="~/css/home.css" rel="stylesheet" />
     <div class="text-center">
         <p style="color:#66FCF1">Want to edit your data ? <a class="btn btn-outline-primary" asp-page="/UserInfo/EditUserData">Edit</a></p>
     </div>
@@ -13,4 +39,89 @@
     <div class="text-center">
         <a class="btn btn-outline-primary" asp-page="/Main/UserFeedbacks">Add your feedback</a>
     </div>
+    <div class="calorieContainer">
+        <span class="calorieName">Calories [Total:@Model.userMacros.DailyCalories kcl]:</span>
+        <span class="calorieInfo">Remaining: @Model.userMacrosDTO.RemainingDailyCalories</span>
+        <div class="progress caloriesBarContainer">
+            <div class="progress-bar bg-success remaining" role="progressbar" style="@progressCaloriesStyle" aria-valuenow="@usedCaloriesPercentage" aria-valuemin="0" aria-valuemax="100">Consumed: @usedCalories</div>
+        </div>
+    </div>
+    <div class="otherBarsContainer">
+        <div class="carbContainer">
+            <span class="barName">Carbs [Total:@Model.userMacros.DailyCarbs g]:</span>
+            <span class="barInfo">Remaining: @Model.userMacrosDTO.RemainingDailyCarbs</span>
+            <div class="progress">
+                <div class="progress-bar bg-info" role="progressbar" style="@progressCarbsStyle" aria-valuenow="@usedCarbsPercentage" aria-valuemin="0" aria-valuemax="100">Consumed: @usedCarbs</div>
+            </div>
+        </div>
+        <div class="carbContainer">
+            <span class="barName">Fats [Total:@Model.userMacros.DailyFats g]:</span>
+            <span class="barInfo">Remaining: @Model.userMacrosDTO.RemainingDailyFats</span>
+            <div class="progress">
+                <div class="progress-bar bg-warning" role="progressbar" style="@progressFatsStyle" aria-valuenow="@usedFatsPercentage" aria-valuemin="0" aria-valuemax="100">Consumed: @usedFats</div>
+            </div>
+        </div>
+        <div class="carbContainer">
+            <span class="barName">Protein [Total:@Model.userMacros.DailyProtein g]:</span>
+            <span class="barInfo">Remaining: @Model.userMacrosDTO.RemainingDailyProtein</span>
+            <div class="progress">
+                <div class="progress-bar bg-danger" role="progressbar" style="@progressProteinStyle" aria-valuenow="@usedProteinPercentage" aria-valuemin="0" aria-valuemax="100">Consumed: @usedProtein</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-deck">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Breakfast</h5>
+                        @foreach (var obj in Model.selectedFoodList)
+                        {
+                            if (obj.Meal == "Breakfast")
+                            {
+                                <p class="card-title">@obj.FoodName</p>
+                            }
+                        }
+                </div>
+            </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Lunch</h5>
+                            @foreach (var obj in Model.selectedFoodList)
+                            {
+                                if (obj.Meal == "Lunch")
+                                {
+                                    <p class="card-title">@obj.FoodName</p>
+                                }
+                            }
+
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Dinner</h5>
+                            @foreach (var obj in Model.selectedFoodList)
+                            {
+                                if (obj.Meal == "Dinner")
+                                {
+                                    <p class="card-title">@obj.FoodName</p>
+                                }
+                            }
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Snacks</h5>
+                            @foreach (var obj in Model.selectedFoodList)
+                            {
+                                if (obj.Meal == "Snacks")
+                                {
+                                    <p class="card-title">@obj.FoodName</p>
+                                }
+                            }
+                    </div>
+                </div>
+    </div>
 }
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+<script src="~/js/bootstrap.bundle.min.js"></script>

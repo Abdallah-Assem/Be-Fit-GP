@@ -152,5 +152,29 @@ namespace BeFit_API.Controllers
             await _dbContext.SaveChangesAsync();
             return Ok(User_UserMacros.CombinedUser.Id);
         }
+        [HttpGet]
+        [Route("api/get-user-calories/{id}")]
+        public async Task<IActionResult> GetUserMacros(Guid id)
+        {
+            var dailyMacros = await _dbContext.UserMacros.SingleOrDefaultAsync(x => x.UserId == id);
+            if (dailyMacros == null)
+                return BadRequest("this user doesnt have macros");
+            var dailySelectedFood = await _dbContext.SelectedFood.Where(x => x.UserId == id && x.IsActive == true && x.TimeCreated.Day == DateTime.Now.Day).ToListAsync();
+            UserMacrosDTO userMacrosDTO = new UserMacrosDTO
+            {
+                RemainingDailyCalories = dailyMacros.DailyCalories,
+                RemainingDailyCarbs = dailyMacros.DailyCarbs,
+                RemainingDailyFats = dailyMacros.DailyFats,
+                RemainingDailyProtein = dailyMacros.DailyProtein
+            };
+            foreach (var dailyFood in dailySelectedFood)
+            {
+                userMacrosDTO.RemainingDailyCalories -= dailyFood.Calories;
+                userMacrosDTO.RemainingDailyCarbs -= dailyFood.Carbs;
+                userMacrosDTO.RemainingDailyFats -= dailyFood.Fats;
+                userMacrosDTO.RemainingDailyProtein -= dailyFood.Protein;
+            }
+            return Ok(userMacrosDTO);
+        }
     }
 }

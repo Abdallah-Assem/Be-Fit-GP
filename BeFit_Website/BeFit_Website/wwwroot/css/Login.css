@@ -6,7 +6,7 @@
 }
 
 body {
-    background: #f6f5f7;
+    background: #e6e6e6;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,7 +16,10 @@ body {
     margin: -20px 0 50px;
 }
 
-h1 {
+.h1Login {
+    background: -webkit-linear-gradient( #1488cc, #2b32b2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-weight: bold;
     margin: 0;
 }
@@ -45,10 +48,10 @@ a {
     margin: 15px 0;
 }
 
-button {
+.button1 {
     border-radius: 20px;
-    border: 1px solid #aa0909;
-    background-color: #aa0909;
+    border: none;
+    background: linear-gradient(to right, #1488cc, #2b32b2);
     color: #FFFFFF;
     font-size: 12px;
     font-weight: bold;
@@ -61,9 +64,9 @@ button {
 
 .button2 {
     border-radius: 20px;
-    border: 1px solid white;
+    border: none;
     background-color: white;
-    color: #aa0909;
+    color: #2b32b2;
     font-size: 12px;
     font-weight: bold;
     padding: 12px 45px;
@@ -175,9 +178,7 @@ input {
 }
 
 .overlay {
-    background: #aa0909;
-    background: -webkit-linear-gradient(to right, #aa0909, #aa0909);
-    background: linear-gradient(to right, #aa0909, #aa0909);
+    background: linear-gradient(to top, #1488cc, #2b32b2);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0 0;

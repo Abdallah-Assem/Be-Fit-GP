@@ -14,6 +14,8 @@ namespace BeFit_Website.Pages.Main
            .Build();
 
         public UserMacros userMacros { get; set; } = new();
+        public List<SelectedFood> selectedFoodList { get; set; } = new();
+        public UserMacrosDTO userMacrosDTO { get; set; } = new();
         public async Task OnGet()
         {
             // call user macros
@@ -27,6 +29,18 @@ namespace BeFit_Website.Pages.Main
             {
                 var stringData = request.Content.ReadAsStringAsync().Result;
                 userMacros = JsonConvert.DeserializeObject<UserMacros>(stringData);
+                request = await client.GetAsync("api/get-user-calories/" + currentUser.ToString().Replace("\"", ""));
+                if (request.IsSuccessStatusCode)
+                {
+                    var stringData2 = request.Content.ReadAsStringAsync().Result;
+                    userMacrosDTO = JsonConvert.DeserializeObject<UserMacrosDTO>(stringData2);
+                    request = await client.GetAsync("api/get-selected-food/" + currentUser.ToString().Replace("\"", ""));
+                    if (request.IsSuccessStatusCode)
+                    {
+                        var stringData3 = request.Content.ReadAsStringAsync().Result;
+                        selectedFoodList = JsonConvert.DeserializeObject<List<SelectedFood>>(stringData3);
+                    }
+                }
             }
         }
 

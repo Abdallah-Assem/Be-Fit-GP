@@ -65,6 +65,13 @@ namespace BeFit_API.Controllers
 
             }
         }
+        [HttpGet]
+        [Route("api/get-selected-food/{id}")]
+        public async Task<ActionResult<List<SelectedFood>>> GetSelectedFood(Guid id)
+        {
+            List<SelectedFood> selectedFoods= await _dbContext.SelectedFood.Where(x => x.UserId == id).ToListAsync();
+            return Ok(selectedFoods);
+        }
 
         [HttpPost]
         [Route("api/add-selected-food")]
