@@ -72,9 +72,9 @@
 
 .feedback-form .Post-button {
     color: #fff;
-    background: #792020;
+    background: linear-gradient(to top, #1488cc, #2b32b2);
 }
 
     .feedback-form .Post-button:hover {
-        background: #FF0000;
+        background: linear-gradient(to top, #2b32b2, #1488cc)
     }
