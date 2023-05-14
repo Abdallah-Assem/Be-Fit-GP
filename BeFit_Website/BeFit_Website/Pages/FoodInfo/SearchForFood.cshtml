@@ -33,88 +33,155 @@
 
         </div>
     </nav>
-    <div style="margin-bottom:90px;"></div>
+
     <div class="main">
-
-            <div class="jumbotron" id="jumbotron">
-
-                <h1 class="display-4" id="display">Here you will find the details of food you ate!</h1>
-                <h4 >All info is after the food has been cooked.</h4> 
-                <hr class="my-4">
-                <h6>Let us share with you your meals!</h6>
-                <p class="lead">
+        <div class="jumbotron" id="jumbotron">
+            <h1 class="display-4" id="display">Here you will find the details of food you ate!</h1>
+            <h4>All info is after the food has been cooked.</h4>
             <form method="post" class="form-inline" enctype="multipart/form-data">
                 <input asp-for="food.name" class="foorm2" type="search" placeholder="Search" aria-label="Search" required>
                 <button asp-page-handler="Search" class="btn btn-primary" id="searchBtn" type="submit">Search</button>
             </form>
-            
-                  @if (!string.IsNullOrEmpty(Model.food.name))
-                  {      
-                        <div class="table-responsive" >
-                            <table class="table table-bordered" >
-                                <thead class=tableColor >
-                                  <tr >
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Calories</th>
-                                    <th scope="col">Total Fats(g)</th>
-                                    <th scope="col">Saturated Fats(g)</th>
-                                    <th scope="col">Protein(g)</th>
-                                    <th scope="col">Sodium(mg)</th>
-                                    <th scope="col">Pottassium(mg)</th>
-                                    <th scope="col">Cholesterol(mg)</th>
-                                    <th scope="col">Carbs(g)</th>
-                                    <th scope="col">Fiber(g)</th>
-                                    <th scope="col">Sugar(g)</th>
-                                  </tr>
-                                </thead>
-      
-                                <tbody >
-                                    <tr class="table-row" >
-                                      <td>@Model.food.name</td>
-                                      <td>@Model.food.calories</td>
-                                      <td>@Model.food.fat_total_g</td>
-                                      <td>@Model.food.fat_saturated_g</td>
-                                      <td>@Model.food.protein_g</td>
-                                      <td>@Model.food.sodium_mg</td>
-                                      <td>@Model.food.potassium_mg</td>
-                                      <td>@Model.food.cholesterol_mg</td>
-                                      <td>@Model.food.carbohydrates_total_g</td>
-                                      <td>@Model.food.fiber_g</td>
-                                      <td>@Model.food.sugar_g</td>
-                                      <td class="addbtn">
-                                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">
-                                        Add
-                                      </button></td>
-                                      </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                  } 
-                  @if (!string.IsNullOrEmpty(Model.ErrorMessage))
-                  {
-                    <div>
-                        <span>
-                            There were no results for your search.
-                            <br>
-                            <b>Suggestions:</b>
-                            <br>
-                            1- Make sure all words are spelled correctly.
-                            <br>
-                            2- Search by ingredient.
-                            <br>
-                            3- Try more general keywords like 'apple'.
-                        </span>
-                    </div>
-                  }
+        </div>
+        <hr class="my-3">
+        <h1>Let us share with you your meals!</h1>
+        <h2>Here it is:</h2>
+        @if (!string.IsNullOrEmpty(Model.food.name))
+        {
+            <div class="mtable">
+                <table class="rtable">
+                    <thead>
+                        <tr>
+                            <th style="font-weight: bold;">Name</th>
+                            <th>@Model.food.name</th>
+                         </tr>
+                     </thead>
+                     <tbody>
+                         <tr>
+                            <td style="font-weight: bold;">Calories</td>
+                            <td>@Model.food.calories</td>
+                         </tr>
+                         <tr>
+                            <td style="font-weight: bold;">Total Fats(g)</td>
+                            <td>@Model.food.fat_total_g</td>
+                         </tr>
+                         <tr>
+                            <td style="font-weight: bold;">Saturated Fats(g)</td>
+                            <td>@Model.food.fat_saturated_g</td>
+                         </tr>
+                         <tr>
+                            <td style="font-weight: bold;">Protien(g)</td>
+                            <td>@Model.food.protein_g</td>
+                         </tr>
+                         <tr>
+                            <td style="font-weight: bold;">Sodium (mg)</td>
+                            <td>@Model.food.sodium_mg</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold;">Pottassium(mg)</td>
+                            <td>@Model.food.potassium_mg</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold;">Cholestrol(mg)</td>
+                            <td>@Model.food.cholesterol_mg</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold;">Carbs(g)</td>
+                            <td>@Model.food.carbohydrates_total_g</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold;">Fiber(g)</td>
+                            <td>@Model.food.fiber_g</td>
+                         </tr>
+                        <tr>
+                            <td style="font-weight: bold;">Sugar(g)</td>
+                            <td>@Model.food.sugar_g</td>
+                        </tr>
+                       </tbody>
+                </table>
+                <button type="button" class="btn" id="addBtn" data-toggle="modal" data-target="#exampleModalCenter">
+                    Add
+                </button>
+            </div>
+        }else if(!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+        <div>
+            <span>
+                There were no results for your search.
+                <br>
+                <b>Suggestions:</b>
+                <br>
+                1- Make sure all words are spelled correctly.
+                <br>
+                2- Search by ingredient.
+                <br>
+                3- Try more general keywords like 'apple'.
+            </span>
+        </div>
+        }
+        else
+        {
+            <div class="mtable">
+                <table class="rtable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Food Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Calories</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Total Fats(g)</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Saturated Fats(g)</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Protien(g)</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Sodium (mg)</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Pottassium(mg)</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Cholestrol(mg)</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Carbs(g)</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Fiber(g)</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Sugar(g)</td>
+                            <td>0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        }
 
-                <div class="special">
-                    <h6>Or you can just add your special food from here..!</h6>
-                    <a asp-page="/FoodInfo/SpecialFood"> <button type="button" class="btn btn-dark btn-sm">Add special food</button></a>
-                </div>
+        <div class="special">
+            <h6>Or you can just add your special food from here..!</h6>
+            <a asp-page="/FoodInfo/SpecialFood"> <button type="button" class="btn btn-dark btn-sm">Add special food</button></a>
+        </div>
 
-              
-              
-              <!-- Modal -->
+
+        <!-- Modal -->
               
                   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -151,18 +218,8 @@
                                 </form>
                             </div>
                         </div>
-                  </div>
-              
-                          
-
-                          
+                  </div>        
             </div>
-             
-              
-
-    </div>
-            
-    
 }
             <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
             <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
