@@ -9,7 +9,11 @@
     margin: auto;
     margin-top:5px;
 }
-
+.head {
+    background: -webkit-linear-gradient( #1488cc, #2b32b2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 .feedback-post header {
     font-size: 22px;
     font-weight: 600;

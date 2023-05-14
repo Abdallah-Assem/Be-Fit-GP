@@ -19,7 +19,9 @@ namespace BeFit_API.Migrations
                 .WithColumn("Calories").AsDouble().NotNullable()
                 .WithColumn("Fats").AsDouble().NotNullable()
                 .WithColumn("Carbs").AsDouble().NotNullable()
-                .WithColumn("Protein").AsDouble().NotNullable();
+                .WithColumn("Protein").AsDouble().NotNullable()
+                .WithColumn("IsActive").AsBoolean().NotNullable();
+
      
         }
     }

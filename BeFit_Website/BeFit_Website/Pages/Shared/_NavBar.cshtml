@@ -2,10 +2,10 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
-
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/photos/4.png" width="80" draggable="false" /></a>
+    <link href="~/css/navbar.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.min.css" rel="stylesheet"/>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+        <a class="navbar-brand" asp-area="" asp-page="/Main/Home"><img src="~/photos/4.png" width="80" draggable="false" /></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -16,6 +16,12 @@
                 <li class="nav-item active">
                     <a class="nav-link" asp-page="/Main/Home">Home <span class="sr-only">(current)</span></a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" asp-page="/FoodInfo/SearchForFood">Food <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" asp-page="/Main/UserFeedbacks">Feedbacks <span class="sr-only">(current)</span></a>
+                </li>
                 <li class="nav-item">
 
                 </li>
@@ -23,8 +29,6 @@
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Profile</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" asp-page="/UserInfo/EditUserData">Edit Profile</a>
-
-                        <a class="dropdown-item" asp-page="/Main/UserFeedbacks">feedback</a>
                         <a class="dropdown-item" asp-page="/UserInfo/Login">Log out</a>
 
                     </div>

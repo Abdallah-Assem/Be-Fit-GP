@@ -2,128 +2,147 @@
 @model BeFit_Website.Pages.FoodInfo.SpecialFoodModel
 @{
     <head>
-        <link href="~/css/searchforfood.css" rel="stylesheet" />
+        <link href="~/css/specialfood.css" rel="stylesheet" />
     </head>
-    <h1> your Special Food</h1>
-    <table class="table table-bordered table-striped" >
+    <div class="jumbotron" id="jumbotron">
+    <h1 class="display-4" id="display">Here you will find the food you made!</h1>
+    <h4 >Make sure that the food is cooked before Weighting it for accuracy.</h4> 
+
+  </div>
+    <hr class="my-3">
+    <h1 style="color:#1a1a1a;">Let us get some details about the food that you ate!  <button type="button"  id="SaveBtn" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">
+      Add special Food
+    </button></h1>
+    <div class="mtable">
+        <table class="rtable">
         <thead>
-            <tr>
-                <th>Name</th>
-                <th>Calories</th>
-                <th>Fats</th>
-                <th>Carbs</th>
-                <th>Protein</th>
-                <th><button type="button" class="show-PopUp">Add New ➕</button></th>
-            </tr>
+          <tr>
+            <th >Name</th>
+            <th>Calories</th>
+            <th>Fats(g)</th>
+            <th>Carbs(g)</th>
+            <th>Protien(g)</th>
+            <th>Manage</th>
+          </tr>
         </thead>
         <tbody>
-            @foreach (var obj in Model.specialFoodList)
-            {
-                <tr>
-                        <td>@obj.Name</td>
-                        <td>@obj.Calories</td>
-                        <td>@obj.Carbs</td>
-                        <td>@obj.Fats</td>
-                        <td>@obj.Protein</td>
-                        <td>
-                            <form method="post" enctype="multipart/form-data">
-                            <div class="form-floating form-outline mb-4">
-                                <label class="form-label">Quantity: </label>
-                                <input asp-for="SpecialFood_SelectedFood.CombinedSelectedFood.Quantity" value="1" step="1" class="form-control" type="number" required>
-                                <span asp-validation-for="SpecialFood_SelectedFood.CombinedSelectedFood.Quantity" class="text-danger"></span>
-                            </div>
-                            <div class="form-floating form-outline mb-4">
-                                <label class="form-label">Weight (g):</label>
-                                <input asp-for="SpecialFood_SelectedFood.CombinedSelectedFood.Weight" value="100" class="form-control" type="number" required>
-                                <span asp-validation-for="SpecialFood_SelectedFood.CombinedSelectedFood.Weight" class="text-danger"></span>
-                            </div>
-                            <div>
-                                <div class="input-group mb-3">
-                                    <label class="input-group-text">Meal</label>
-                                    <select class="form-select" asp-for="SpecialFood_SelectedFood.CombinedSelectedFood.Meal" required>
-                                        <option hidden></option>
-                                        <option value="Breakfast">Breakfast</option>
-                                        <option value="Lunch">Lunch</option>
-                                        <option value="Dinner">Dinner</option>
-                                        <option value="Snacks">Snacks</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <span asp-validation-for="SpecialFood_SelectedFood.CombinedSelectedFood.Meal" class="text-danger"></span>
-                                <button type="submit" asp-page-handler="Select" asp-route-itemid=@obj.Id>Add</button>
-                                </div>
-                             </div>
-                            </form>
-                        </td>
-                        
-                </tr>
-            }
+        @foreach (var obj in Model.specialFoodList)
+        {
+          <tr>
+            <td>@obj.Name</td>
+            <td>@obj.Calories</td>
+            <td>@obj.Fats</td>
+            <td>@obj.Carbs</td>
+            <td>@obj.Protein</td>       
+            <td>
+            <button type="button" class="btn btn-primary showPopUp" data-toggle="modal" data-target="#exampleModal" data-whatever="" id="SaveBtn" style="">Add</button>
+            <form method="post" enctype="multipart/form-data" style="display:inline;">
+                <button type="submit" asp-page-handler="DeleteSpecialFood" class="btn" style="background:#dc3545; color:#ffffff;" asp-route-itemid="@obj.Id">Delete</button>
+            </form>
+            </td>
+          </tr>
+        }
         </tbody>
-    </table>
-    <form method="post" enctype="multipart/form-data">
-        <div class="PopUp hidden">
-            <button type="button" class="close-PopUp">&times;</button>
-            <h1>Details of your special food </h1>
-            <div class="form-floating form-outline mb-4">
-                <label class="form-label">Food Name: </label>
-                <input asp-for="specialFood.Name" class="form-control" required>
-                <span asp-validation-for="specialFood.Name" class="text-danger"></span>
+      </table>
+      
+    
+    <p class="lead">
+    
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Details</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              <form method="post" enctype="multipart/form-data">
+                    <div class="modal-body" id="modalCONT">
+                    
+                        <div class="Name"> <label for="tentacles">Name:</label>
+                            <input type="text"  asp-for="specialFood.Name"></div>
+                            <span asp-validation-for="specialFood.Name" class="text-danger" style="color:#aa0909"></span>
+                        <div class="calories"> <label for="tentacles">Calories:</label>
+                           <input type="number"  asp-for="specialFood.Calories" value=""></div>
+                           <span asp-validation-for="specialFood.Calories" class="text-danger" style="color:#aa0909"></span>
+                        <div class="fats"><label for="tentacles">Fats(g):</label>
+                            <input type="number"  asp-for="specialFood.Fats" value=""></div>
+                            <span asp-validation-for="specialFood.Fats" class="text-danger" style="color:#aa0909"></span>
+                        <div class="protein"> <label for="tentacles">Protein(g):</label>
+                            <input type="number"  asp-for="specialFood.Protein" value=""></div>
+                            <span asp-validation-for="specialFood.Protein" class="text-danger" style="color:#aa0909"></span>
+                        <div class="carbs"><label for="tentacles">Carbs(g):</label>
+                            <input type="number"  asp-for="specialFood.Carbs" value=""></div>
+                            <span asp-validation-for="specialFood.Carbs" class="text-danger" style="color:#aa0909"></span>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                      <button type="submit" id="SaveBtn" class="btn btn-primary" asp-page-handler="AddSpecialFood">Save </button>
+                    </div>
+              </form>
+              </div>
             </div>
-            <div class="form-floating form-outline mb-4">
-                <label class="form-label">Calories: </label>
-                <input asp-for="specialFood.Calories"  class="form-control" type="number" required>
-                <span asp-validation-for="specialFood.Calories" class="text-danger"></span>
+          </div>
+    </p>
+        <div class="modal fade hide pop" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="modal-body" id="modalCONT">
+
+                            <div class="Quantity">
+                                <label for="tentacles">Quantity:</label>
+                                <input type="number" asp-for="SpecialFood_SelectedFood.CombinedSelectedFood.Quantity" value="" step="1">
+                            </div>
+                            <span asp-validation-for="SpecialFood_SelectedFood.CombinedSelectedFood.Quantity" class="text-danger" style="color:#aa0909"></span>
+                            <div class="Weight">
+                                <label for="tentacles">Weight(g):</label>
+                                <input type="number" asp-for="SpecialFood_SelectedFood.CombinedSelectedFood.Weight" value="">
+                            </div>
+                            <span asp-validation-for="SpecialFood_SelectedFood.CombinedSelectedFood.Weight" class="text-danger" style="color:#aa0909"></span>
+                            <div class="Weight">
+                                <label for="tentacles">Meal:</label>
+                                <select asp-for="SpecialFood_SelectedFood.CombinedSelectedFood.Meal">
+                                    <option value="" hidden>Select Meal</option>
+                                    <option value="Breakfast">Breakfast</option>
+                                    <option value="Lunch">Lunch</option>
+                                    <option value="Dinner">Dinner</option>
+                                    <option value="Snacks">Snacks</option>
+                                </select>
+                            </div>
+                            <span asp-validation-for="SpecialFood_SelectedFood.CombinedSelectedFood.Meal" class="text-danger" style="color:#aa0909"></span>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                            <button type="submit" id="SaveBtn" class="btn btn-primary" asp-page-handler="Select">Add</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-floating form-outline mb-4">
-                <label class="form-label">Protein: </label>
-                <input asp-for="specialFood.Protein" class="form-control" type="number" required>
-                <span asp-validation-for="specialFood.Protein" class="text-danger"></span>
-            </div>
-            <div class="form-floating form-outline mb-4">
-                <label class="form-label">Carbs: </label>
-                <input asp-for="specialFood.Carbs" class="form-control" type="number" required>
-                <span asp-validation-for="specialFood.Carbs" class="text-danger"></span>
-            </div>
-            <div class="form-floating form-outline mb-4">
-                <label class="form-label">Fats </label>
-                <input asp-for="specialFood.Fats" class="form-control" type="number" required>
-                <span asp-validation-for="specialFood.Fats" class="text-danger"></span>
-            </div>
-            
-            <button type="submit" asp-page-handler="AddSpecialFood" class="btn btn-success btn-block mb-3"><i class="bi bi-patch-plus"> Add Special Food ➕</i></button>
         </div>
-        <div class="overlay hidden"></div>
-    </form>
+        
+        
+
+        
+           
+  </div>
 
 }
+
 @section Scripts{
     @{
         <partial name="_ValidationScriptsPartial" />
+        <partial name="_NavBar" />
     }
 }
-<script>
-
-    const PopUp = document.querySelector('.PopUp');
-    const overlay = document.querySelector('.overlay');
-    const closePopUp = document.querySelector('.close-PopUp');
-    const showPopUp = document.querySelector('.show-PopUp');
-
-    function openPopUp() {
-        PopUp.classList.remove('hidden');
-        overlay.classList.remove('hidden');
-    }
-    function exitPopUp() {
-        PopUp.classList.add('hidden');
-        overlay.classList.add('hidden');
-    }
-    //make btns do their job
-    showPopUp.addEventListener('click', openPopUp);
-    //close the pop-up window by X btn
-    closePopUp.addEventListener('click', exitPopUp);
-    //close the pop-up window by clicking on page
-    overlay.addEventListener('click', exitPopUp);
-    //close the pop-up by escape on keyboard
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') exitPopUp();
-    });
-</script>

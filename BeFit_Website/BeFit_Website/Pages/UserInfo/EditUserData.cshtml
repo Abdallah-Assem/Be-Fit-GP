@@ -1,7 +1,6 @@
 ﻿@page
 @model BeFit_Website.Pages.UserInfo.EditUserModel
 @{
-    <link href="~/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="~/css/edituserdata.css" rel="stylesheet" />
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -46,7 +45,7 @@
             <div class="row">
                 <div class="col-md-4 order-md-2 mb-4">
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="text-muted">IMAGE</span>
+                        <span class="text-muted head">IMAGE</span>
                     </h4>
 
                         <ul class="list-group mb-3">
@@ -55,22 +54,22 @@
                                     @if (Model.user.ProfileUrl == null)
                                     {
                                         <img src="https://www.kindpng.com/picc/m/24-248394_user-icon-hd-png-download.png" id="output" width="200"
-                                             style="width: 165px;height: 165px;box-shadow: 0 0 10px 0 rgba(255,255,255,.35);border-radius: 100px;z-index: 0;" />
+                                             style="width: 165px;height: 165px;box-shadow: 0 0 10px 0 rgba(255,255,255,.35);border-radius: 100px;z-index: 0;border: 2px solid gray;" />
                                     }else {
                                     <img src="@Model.user.ProfileUrl" id="output" width="200"
-                                     style="width: 165px;height: 165px;box-shadow: 0 0 10px 0 rgba(255,255,255,.35);border-radius: 100px;z-index: 0;" />
+                                     style="width: 165px;height: 165px;box-shadow: 0 0 10px 0 rgba(255,255,255,.35);border-radius: 100px;z-index: 0; border: 2px solid gray;" />
                                     }
                             </div>
                         </ul>
                         <div class="modal-footer">
-                            <label for="file-upload" class="btn btn-secondary" style="background-color:#aa0909">Change image</label>
+                            <label for="file-upload" class="btn btn-secondary" style="background:linear-gradient(to top, #1488cc, #2b32b2);">Change image</label>
                             <input type="file" id="file-upload" asp-for="user.ProfilePhoto" style="display:none;" data-dismiss="modal" onchange="loadFile(event)">
                             <!--<button id="SaveBtn" type="button" class="btn btn-primary">Save changes</button>-->
                         </div>
 
                 </div>
                 <div class="col-md-8 order-md-1">
-                    <h4 class="mb-3">Edit Profile</h4>
+                    <h4 class="mb-3 head">Edit Profile</h4>
 
                         <div class="mb-3">
                             <label for="username">User Name</label>
@@ -108,7 +107,7 @@
                             </div>
                            <!-- <a href="UserMacros.html"><button id="SaveBtn" class="btn btn-primary btn-lg btn-block" asp-page="/UserInfo/EditUserMacros">Edit Your Macros</button></a> -->
                             <a class="btn btn-secondary" asp-page="/UserInfo/EditUserMacros">Edit Macros</a>
-                            <button type="submit" asp-page-handler="EditUser" id="SaveBtn" class="btn btn-primary">Save</button>
+                        <button type="submit" asp-page-handler="EditUser" id="SaveBtn" class="btn btn-primary" style="background:linear-gradient(to top, #1488cc, #2b32b2);">Save</button>
                 </div>
             </div>
             </form>
@@ -121,9 +120,6 @@
   
   </main>
 }
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
-<script src="~/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/edituserdata.js"></script>
 
 `@if (@Model.Msg != null)
@@ -138,6 +134,11 @@
                 showConfirmButton: true
             })
         </script>
+    }
+}
+@section Scripts{
+    @{
+        <partial name="_NavBar" />
     }
 }
 

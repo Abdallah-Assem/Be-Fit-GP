@@ -1,0 +1,142 @@
+﻿nav {
+    background: linear-gradient(to left, #1488cc, #2b32b2);
+}
+
+#navtxt {
+    color: white;
+}
+
+
+
+
+.main {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.table-row {
+    background-color: #E5E5E5;
+    text-align: center;
+}
+
+#jumbotron {
+    margin-top: 100px;
+    text-align: center;
+}
+
+#display {
+    font-weight: bold;
+    color: #2b32b2;
+    text-align: left;
+}
+
+h4 {
+    text-align: left;
+}
+
+
+#SaveBtn {
+    background: linear-gradient(to left, #1488cc, #2b32b2);
+    /* border-radius: 150px; */
+}
+
+.Name {
+    padding-left: 100px;
+    padding-bottom: 10px;
+}
+
+.calories {
+    padding-left: 85px;
+    padding-bottom: 10px;
+}
+
+.protein {
+    padding-left: 70px;
+    padding-bottom: 10px;
+}
+
+.fats {
+    padding-left: 95px;
+    padding-bottom: 10px;
+}
+
+.carbs {
+    padding-left: 83px;
+    padding-bottom: 10px;
+}
+
+.Weight {
+    margin-left: 71px;
+    padding-bottom: 10px;
+}
+
+.Quantity {
+    margin-left: 80px;
+    padding-bottom: 10px;
+}
+
+label {
+    color: #1d97bf;
+}
+
+#modalCONT {
+    font-style: italic;
+    font-weight: bold;
+}
+
+.dropdown2 {
+    margin-left: 110px;
+    color: #1d97bf;
+}
+
+.rtable {
+    display: inline-block;
+    vertical-align: top;
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: normal;
+    border-collapse: separate;
+    border-spacing: 3px;
+}
+
+
+    .rtable th {
+        font-size: 15px;
+        text-align: center;
+        text-transform: uppercase;
+        background: linear-gradient(to top, #1488cc, #2b32b2);
+        color: white;
+    }
+
+    .rtable th,
+    .rtable td {
+        padding: 10px 60px;
+        border: 1px solid black;
+        
+    }
+
+.rtable--flip th:not(:last-child),
+.rtable--flip td:not(:last-child) {
+    border-bottom: 0;
+}
+
+
+.mtable {
+    margin-top: 20px;
+    text-align: center;
+    color: black;
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 500;
+}
+
+body {
+    padding: 25px;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+h1, h2, h3 {
+    margin: 0 0 10px 0;
+    color: #1d97bf;
+}

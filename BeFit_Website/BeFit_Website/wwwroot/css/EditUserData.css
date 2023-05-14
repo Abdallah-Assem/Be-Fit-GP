@@ -1,5 +1,7 @@
 
-
+.navbar {
+    background: linear-gradient(to top, #106da2, #2b32b2);
+}
 .fixed-top {
     top: -16px;
 }
@@ -14,7 +16,14 @@
   -ms-user-select: none;
   user-select: none;
 }
-
+.list-group {
+    border: none;
+}
+.head {
+    background: -webkit-linear-gradient( #1488cc, #2b32b2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 .BtnBtn{ 
     display: block;
     width: 100%;

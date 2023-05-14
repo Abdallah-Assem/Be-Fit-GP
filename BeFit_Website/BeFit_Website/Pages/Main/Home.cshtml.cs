@@ -43,7 +43,19 @@ namespace BeFit_Website.Pages.Main
                 }
             }
         }
+        public async Task<IActionResult> OnPostDeleteSelectedFood(Guid itemid)
+        {
+            var httpClient = HttpContext.RequestServices.GetService<IHttpClientFactory>();
+            var client = httpClient.CreateClient();
+            client.BaseAddress = new Uri(config["BaseAddress"]);
+            var request = await client.GetAsync("/api/delete-selected-food/" + itemid);
+            if (request.IsSuccessStatusCode)
+            {
+                return RedirectToPage("");
+            }
+            return new NoContentResult();
+        }
 
-        
+
     }
 }

@@ -18,13 +18,16 @@
     margin-top: 10px;
     margin-bottom: 25px;
 }
-
+.head {
+    background: -webkit-linear-gradient( #1488cc, #2b32b2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 .form-inline {
     padding-left: 450px;
 }
 
-#search
-{
+#search {
     background: linear-gradient(to left, #1488cc, #2b32b2);
     margin-left: 20px;
     margin-top: 10px;
@@ -32,24 +35,24 @@
 }
 
 #searchBtn {
-    background: linear-gradient(to left, #1488cc, #2b32b2);
+    background: linear-gradient(to top, #1488cc, #2b32b2);
     color: white;
-    margin-bottom:2%;
-    margin-left:1%;
+    margin-bottom: 2%;
+    margin-left: 1%;
 }
 
 #addBtn {
-    background: linear-gradient(to left, #1488cc, #2b32b2);
+    background: linear-gradient(to top, #1488cc, #2b32b2);
     color: white;
-    margin-top:1%;
-    margin-left:50%;
-    margin-right:50%;
+    margin-top: 1%;
+    margin-left: 50%;
+    margin-right: 50%;
 }
 
 
 .btn-sm {
     text-align: center;
-    background: linear-gradient(to left, #1488cc, #2b32b2);
+    background: linear-gradient(to top, #1488cc, #2b32b2);
 }
 
 .special {
@@ -113,7 +116,7 @@
         font-size: 15px;
         text-align: center;
         text-transform: uppercase;
-        background: linear-gradient(to left, #1488cc, #2b32b2);
+        background: linear-gradient(to top, #1488cc, #2b32b2);
         color: white;
     }
 
@@ -147,5 +150,5 @@ body {
 
 h1, h2, h3 {
     margin: 0 0 10px 0;
-    color: #1d97bf;
+    color:   #1d97bf;
 }

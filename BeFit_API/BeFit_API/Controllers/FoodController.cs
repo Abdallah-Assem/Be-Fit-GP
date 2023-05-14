@@ -69,9 +69,10 @@ namespace BeFit_API.Controllers
         [Route("api/get-selected-food/{id}")]
         public async Task<ActionResult<List<SelectedFood>>> GetSelectedFood(Guid id)
         {
-            List<SelectedFood> selectedFoods= await _dbContext.SelectedFood.Where(x => x.UserId == id).ToListAsync();
+            List<SelectedFood> selectedFoods= await _dbContext.SelectedFood.Where(x => x.UserId == id && x.IsActive == true && x.TimeCreated.Day == DateTime.Now.Day).ToListAsync();
             return Ok(selectedFoods);
         }
+
 
         [HttpPost]
         [Route("api/add-selected-food")]
@@ -141,7 +142,7 @@ namespace BeFit_API.Controllers
         [Route("api/get-special-food/{userid}")]
         public async Task<ActionResult<List<SpecialFood>>> GetSpecialFood(Guid userid)
         {
-            List<SpecialFood> specialFood = await _dbContext.SpecialFood.Where(x => x.UserId == userid).ToListAsync();
+            List<SpecialFood> specialFood = await _dbContext.SpecialFood.Where(x => x.UserId == userid && x.IsActive == true).ToListAsync();
             return Ok(specialFood);
         }
 
@@ -149,7 +150,7 @@ namespace BeFit_API.Controllers
         [Route("api/get-one-special-food/{id}")]
         public async Task<ActionResult<SpecialFood>> GetOneSpecialFood(Guid id)
         {
-            var specialdb = await _dbContext.SpecialFood.FirstOrDefaultAsync(x => x.Id == id);
+            var specialdb = await _dbContext.SpecialFood.FirstOrDefaultAsync(x => x.Id == id && x.IsActive == true);
             if (specialdb == null)
             {
                 return BadRequest("Special Food doesn't exist");
@@ -173,9 +174,28 @@ namespace BeFit_API.Controllers
                 return BadRequest("no special food");
             }
             specialFood.Id = Guid.NewGuid();
+            specialFood.IsActive = true;
             await _dbContext.SpecialFood.AddAsync(specialFood);
             await _dbContext.SaveChangesAsync();
             return Ok(specialFood);
+        }
+        [HttpGet]
+        [Route("api/delete-selected-food/{id}")]
+        public async Task<IActionResult> deleteSelectedFood(Guid id)
+        {
+            var deletedSelectedFood = await _dbContext.SelectedFood.FindAsync(id);
+            deletedSelectedFood.IsActive = false;
+            await _dbContext.SaveChangesAsync();
+            return Ok();
+        }
+        [HttpGet]
+        [Route("api/delete-special-food/{id}")]
+        public async Task<IActionResult> deleteSpecialFood(Guid id)
+        {
+            var deletedSpecialFood = await _dbContext.SpecialFood.FindAsync(id);
+            deletedSpecialFood.IsActive = false;
+            await _dbContext.SaveChangesAsync();
+            return Ok();
         }
     }
 }

@@ -15,5 +15,6 @@ namespace BeFit_Website.DTO
         public double Carbs { get; set; }
         [Range(0, 1000, ErrorMessage = "Enter Valid Protein")]
         public double Protein { get; set; }
+        public bool IsActive {get; set; }
     }
 }
