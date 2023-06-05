@@ -24,6 +24,8 @@ namespace BeFit_API.Migrations
                 ,
                 Role = "Admin"
                 ,
+                LastUpdate = DateTime.Now
+                ,
                 IsActive = true
 
             });

@@ -12,6 +12,7 @@ namespace BeFit_API.Model
         public string? ProfileUrl { get; set; } = string.Empty;
         [NotMapped]
         public IFormFile? ProfilePhoto { get; set; }
+        public DateTime LastUpdate { get; set; }
         public bool IsActive { get; set;}
         
     }

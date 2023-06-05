@@ -1,5 +1,13 @@
 ﻿
+h1 {
+    background: -webkit-linear-gradient( #1488cc, #2b32b2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: left;
+    margin: 70px 20px 500px 20px;
+    font-weight: bolder;
 
+}
 .feedback-container {
     width: 800px;
     overflow: hidden;

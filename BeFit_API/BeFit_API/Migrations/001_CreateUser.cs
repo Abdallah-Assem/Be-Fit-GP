@@ -20,6 +20,7 @@ namespace BeFit_API.Migrations
                 .WithColumn("Email").AsString().NotNullable().Unique()
                 .WithColumn("ProfileUrl").AsString().Nullable()
                 .WithColumn("Role").AsString().NotNullable()
+                .WithColumn("LastUpdate").AsDateTime().NotNullable()
                 .WithColumn("IsActive").AsBoolean().NotNullable();
         }
     }

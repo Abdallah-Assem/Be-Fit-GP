@@ -13,6 +13,7 @@ namespace BeFit_Website.DTO
         [NotMapped]
         public IFormFile? ProfilePhoto { get; set; }
         public string Role { get; set; } = string.Empty;
+        public DateTime LastUpdate { get; set; }
         public bool IsActive { get; set; }
     }
 }

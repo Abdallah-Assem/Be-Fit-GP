@@ -46,7 +46,10 @@ namespace BeFit_API.Controllers
         public async Task<IActionResult> EditUserData(Guid Userid, [FromBody] UserMacros userNewMacros)
         {
             var UserOldMacros = await _dbContext.UserMacros.SingleOrDefaultAsync(x => x.UserId == Userid);
-
+            var Userdb = await _dbContext.User.SingleOrDefaultAsync(x => x.Id == Userid);
+            Userdb.LastUpdate = DateTime.Now;
+            var today = DateTime.Today;
+            UserOldMacros.Age = today.Year - userNewMacros.DateOfBirth.Year;
             UserOldMacros.Height = userNewMacros.Height;
             UserOldMacros.Weight = userNewMacros.Weight;
             UserOldMacros.Age = userNewMacros.Age;
@@ -99,15 +102,24 @@ namespace BeFit_API.Controllers
         }
         //check if user added his macros or not
         [HttpPost]
-        [Route("api/check-usermacros{checkedUserId}")]
-        public async Task<IActionResult> CheckUserMacros(Guid checkedUserId)
+        [Route("api/check-last-update{checkedUserId}")]
+        public async Task<IActionResult> CheckLastUpdate(Guid checkedUserId)
         {
-            var userMacrosdb = await _dbContext.UserMacros.FirstOrDefaultAsync(x => x.UserId == checkedUserId);
-            if (userMacrosdb == null)
+            var now = DateTime.Now;
+            var userdb = await _dbContext.User.FirstOrDefaultAsync(x => x.Id == checkedUserId);
+            if (userdb == null)
             {
-                return BadRequest("This user doesn't have Macros");
+                return BadRequest("This user doesn't exist");
             }
-            return Ok("This user have macros");
+            //To select update time :
+            if (now.Subtract(userdb.LastUpdate).Days >= 30)
+            {
+                return BadRequest("This user need update");
+            }else
+            {
+            return Ok("This user up-to-date");
+            }
+
         }
 
         //sign up new user
@@ -130,7 +142,6 @@ namespace BeFit_API.Controllers
                 && string.IsNullOrEmpty(User_UserMacros.CombinedUserMacros.Goal)
                 && User_UserMacros.CombinedUserMacros.Height <= 0
                 && User_UserMacros.CombinedUserMacros.Weight <= 0
-                && User_UserMacros.CombinedUserMacros.Age <= 0
                 && string.IsNullOrEmpty(User_UserMacros.CombinedUserMacros.Gender)
                 && string.IsNullOrEmpty(User_UserMacros.CombinedUserMacros.ActivityLevel)
                 )
@@ -139,6 +150,10 @@ namespace BeFit_API.Controllers
             }
 
             User_UserMacros.CombinedUser.Id = Guid.NewGuid();
+            User_UserMacros.CombinedUser.ProfileUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685433119/New_User_ProfilePic_jyinbz.png";
+            User_UserMacros.CombinedUser.LastUpdate = DateTime.Now;
+            var today = DateTime.Today;
+            User_UserMacros.CombinedUserMacros.Age = today.Year - User_UserMacros.CombinedUserMacros.DateOfBirth.Year;
             User_UserMacros.CombinedUserMacros.UserId = User_UserMacros.CombinedUser.Id;
             User_UserMacros.CombinedUser.IsActive = true;
             User_UserMacros.CombinedUser.Role = "User";

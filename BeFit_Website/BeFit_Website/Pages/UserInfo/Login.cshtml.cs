@@ -40,14 +40,14 @@ namespace BeFit_Website.Pages.UserInfo
                 request = await client.PostAsync($"/api/check-role{id.ToString().Replace("\"", "")}", content);
                 if(request.IsSuccessStatusCode) 
                 {
-                    return RedirectToPage("/Admin/AdminHome");
+                    return RedirectToPage("/Admin/ManageFeedbacks");
                 }
-                request = await client.PostAsync($"/api/check-usermacros{id.ToString().Replace("\"", "")}", content);
+                request = await client.PostAsync($"/api/check-last-update{id.ToString().Replace("\"", "")}", content);
             if (request.IsSuccessStatusCode)
             {
                 return RedirectToPage("/Main/Home");
             }
-            return RedirectToPage("/UserInfo/UserMacros");
+            return RedirectToPage("/UserInfo/FollowUpMessage");
 
 
             }

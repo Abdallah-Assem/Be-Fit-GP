@@ -4,26 +4,32 @@
     <link href="~/css/editusermacros.css" rel="stylesheet" />
 
     <main role="main">
-      <!-- Main jumbotron for a primary marketing message or call to action -->
+        <!-- Main jumbotron for a primary marketing message or call to action -->
         <div class="jumbotron">
-        
-        </div>
-      <div class="container">
-        <form method="post" enctype="multipart/form-data">
-        <div class="row">
-            <div class="col-md-4 order-md-2 mb-4">
-   
-            </div>
-            <div class="col-md-8 order-md-1">
-                    <h4 class="mb-3 head">User Macros</h4>
 
-                    <div class="mb-3">
-                        <label for="Height">Height(cm)</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
+        </div>
+        <div class="container">
+            <form method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-4 order-md-2 mb-4">
+
+                    </div>
+                    <div class="col-md-8 order-md-1">
+                        <h4 class="mb-3 head">User Macros</h4>
+
+                        <div class="mb-3">
+                            <label for="Height">Height(cm)</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                </div>
+                                @if (Model.userMacros.Age > 20 && Model.userMacros.Age < 60)
+                                {
+                                    <input type="number" asp-for="userMacros.Height" class="form-control" id="Height" placeholder="Height" readonly="true" required>
+                                } else
+                                {
+                                    <input type="number" asp-for="userMacros.Height" class="form-control" id="Height" placeholder="Height" required>
+                                }
                             </div>
-                            <input type="number" asp-for="userMacros.Height" class="form-control" id="Height" placeholder="Height" required>
-                        </div>
                         <span asp-validation-for="userMacros.Height" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
@@ -35,12 +41,21 @@
                         </div>
                         <span asp-validation-for="userMacros.Weight" class="text-danger"></span>
                     </div>
+                        <div class="mb-3">
+                            <label for="Age">Date of Birth</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                </div>
+                                <input type="Date" step="1" asp-for="userMacros.DateOfBirth" class="form-control" id="Age" readonly="true" required>
+                            </div>
+                            <span asp-validation-for="userMacros.Age" class="text-danger"></span>
+                        </div>
                     <div class="mb-3">
                         <label for="Age">Age</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                             </div>
-                            <input type="number" step="1" asp-for="userMacros.Age" class="form-control" id="Age" placeholder="Age" required>
+                            <input type="number" step="1" asp-for="userMacros.Age" class="form-control" id="Age" placeholder="Age" readonly="true" required>
                         </div>
                         <span asp-validation-for="userMacros.Age" class="text-danger"></span>
                     </div>
@@ -84,9 +99,6 @@
       <hr>
   
   </main>
-    <footer class="container">
-        <p>&copy; Company 2017-2022</p>
-    </footer>
 }
 
 @section Scripts{

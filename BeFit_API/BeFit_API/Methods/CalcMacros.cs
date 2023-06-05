@@ -9,6 +9,7 @@ namespace BeFit_API.Methods
             //Calculate BMR (Mifflin-St Jeor)
             double BMR = 0;
             double TDEE = 0;
+
             if (userMacros.Gender == "Male")
             {
                 BMR = (double)(5 + (10 * userMacros.Weight) + (6.25 * userMacros.Height) - (5 * userMacros.Age));
@@ -27,6 +28,14 @@ namespace BeFit_API.Methods
             if (userMacros.Goal == "Maintain") { userMacros.DailyCalories = Math.Ceiling(TDEE); }
             else if (userMacros.Goal == "Lose") { userMacros.DailyCalories = Math.Ceiling(TDEE - 300); }
             else { userMacros.DailyCalories = Math.Ceiling(TDEE + 300); }
+            //Diseases Effect 
+            //Diabetes affect by 20%
+            if (userMacros.Disease == "Diabetes") { userMacros.DailyCalories = Math.Ceiling(userMacros.DailyCalories * 0.80); }
+            //Blood Pressure affect by 8%
+            else if (userMacros.Disease == "Blood Pressure") { userMacros.DailyCalories = Math.Ceiling(userMacros.DailyCalories * 0.92); }
+            //Cholesterol affect by 17%
+            else if (userMacros.Disease == "Cholesterol") { userMacros.DailyCalories = Math.Ceiling(userMacros.DailyCalories * 0.83); }
+
             //Calculate Daily Protein
             if (userMacros.ActivityLevel == "Sedentary" || userMacros.ActivityLevel == "Lightly") { userMacros.DailyProtein = Math.Ceiling((double)(userMacros.Weight * 0.8)); }
             else if (userMacros.ActivityLevel == "Moderately") { userMacros.DailyProtein = Math.Ceiling((double)(userMacros.Weight * 1.2)); }

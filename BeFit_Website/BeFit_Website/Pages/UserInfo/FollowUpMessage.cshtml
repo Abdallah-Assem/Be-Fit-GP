@@ -1,0 +1,19 @@
+﻿@page
+@model BeFit_Website.Pages.UserInfo.FollowUpMessageModel
+@{
+    <link href="~/css/followupmessage.css" rel="stylesheet" />
+
+    <div class="Message-container">
+        <div class="Message-wrapper">
+            <section class="Message-post">
+                <header class="head">You're doing great keep it up</header>
+                <div class="Message-div" id="Message-div">
+                    <p>And to make it till the end let us update your progress and make sure that you're on the right track.</p>
+                    <p>It won't take you a minute so please keep us updated.</p>
+                    <a asp-page="/UserInfo/EditUserMacros"><button asp-page="/UserInfo/EditUserMacros" id="post-button" class="Post-button">Edit your Macros</button></a>
+                </div>
+        </div>
+    </div>
+    <div class="overlay"></div>
+}
+
