@@ -1,0 +1,348 @@
+﻿@page
+@model BeFit_Website.Pages.Exercises.ShowExercisesModel
+@{
+    <link href="~/css/exercises.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+
+
+    <div class="paragraph">
+        <h1 id="top">We got you here!</h1>
+        <h5>Here is your plan, every step you need in order to get your exercises step by step to achive your goal. </h5>
+        <h5>Click on the workout you have today you will get all the details. </h5>
+        <h5>We are loooking forward to your progress!</h5>
+    </div>
+
+
+    <div class="main">
+
+        <!-- ---------------card number1---------------- -->
+        <div class="card1 row-md-8" style="width: 18rem;">
+            <img class="card-img-top" src="~/photos/img1.jpg" alt="Card image cap">
+            <div class="card-body">
+
+                <h4 class="card-title">UPPER & LOWER</h4>
+                <h5 class="card-title">Lightly Active!</h5>
+
+                <p class="card-text">Below are the exercises thet you will need if you are working from 1-3 days.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <!-- <li class="list-group-item">Cras justo odio</li> -->
+                <div class="btn-group">
+                    <a href="#upper" id="but" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Upper</a>
+                </div>
+
+                <div class="btn-group">
+
+                    <a href="#lower" id="but" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Lower</a>
+
+                </div>
+
+
+            </ul>
+        </div>
+
+
+        <!-- ---------------card number2---------------- -->
+        <div class="card2 row-md-8" style="width: 18rem;">
+            <img class="card-img-top" src="~/photos/img2.jpeg" Height="205px" alt="Card image cap">
+            <div class="card-body">
+                <h4 class="card-title">Push, Pull & Legs</h4>
+                <h5 class="card-title">Moderately Active!</h5>
+
+                <p class="card-text">Below are the exercises thet you will need if you are working from 3-5 days.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <!-- <li class="list-group-item">Cras justo odio</li> -->
+                <div class="btn-group">
+                    <a href="#Push" id="but" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Push</a>
+
+                </div>
+
+                <div class="btn-group">
+                    <a href="#Pull" id="but" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Pull</a>
+
+                </div>
+                <div class="btn-group">
+                    <a href="#legs" id="but" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Legs</a>
+
+                </div>
+
+                <div class="btn-group">
+                    <a href="#abs" id="but" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Abs</a>
+
+                </div>
+
+            </ul>
+        </div>
+        <!-- ---------------card number3---------------- -->
+        <div class="card3 row-md-8" style="width: 18rem;">
+            <img class="card-img-top" src="~/photos/img3.jpg" Height="200px" alt="Card image cap">
+            <div class="card-body">
+
+                <h4 class="card-title">Bro Split</h4>
+                <h5 class="card-title">Highly active!</h5>
+
+                <p class="card-text">Below are the exercises thet you will need if you are working from 4-6 days.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <!-- <li class="list-group-item">Cras justo odio</li> -->
+
+                <div class="btn-group">
+                    <a href="#Chest" id="but" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Chest</a>
+
+                </div>
+
+                <div class="btn-group">
+                    <a href="#Back" id="but" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Back</a>
+
+
+                </div>
+                <div class="btn-group">
+                    <a href="#shoulders" id="but" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Shoulders</a>
+
+                </div>
+
+
+
+                <div class="btn-group">
+                    <a href="#abs" id="but" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Abs</a>
+                </div>
+
+                <div class="btn-group">
+                    <a href="#legs" id="but" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Legs</a>
+
+                </div>
+
+            </ul>
+        </div>
+        <!-- Upper exercises -->
+        <br>
+        <div id="upper" class="upper">
+            <div class="jumbotron">
+                <h1 class="mb-4">Upper Body Workout</h1>
+                <a href="#top" id="but" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true" style="margin-left:2%;">Back to Top</a>
+                <br>
+                    @foreach (var obj in Model.exercisesList){
+                        if (obj.plan == "Upper Body")
+                        {
+                            <div class="card" style="width: 18rem; display:inline-block; margin:2%;">
+                                <img class="card-img-top" src="@obj.gifUrl" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">@obj.name</h5>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><b>Sets :</b> @obj.SetsPlan</li>
+                                    <li class="list-group-item"><b>Equipment :</b> @obj.equipment</li>
+                                    <li class="list-group-item"><b>Target :</b> @obj.target</li>
+                                </ul>
+                            </div>
+                        }
+                    }
+            </div>
+            
+        </div>
+        <div id="lower" class="lower">
+            <div class="jumbotron">
+                <h1 class="mb-4">Lower Body Workout</h1>
+                <a href="#top" id="but" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true" style="margin-left:2%;">Back to Top</a>
+                <br>
+                @foreach (var obj in Model.exercisesList)
+                {
+                    if (obj.plan == "Lower Body")
+                    {
+                        <div class="card" style="width: 18rem; display:inline-block; margin:2%;">
+                            <img class="card-img-top" src="@obj.gifUrl" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">@obj.name</h5>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><b>Sets :</b> @obj.SetsPlan</li>
+                                <li class="list-group-item"><b>Equipment :</b> @obj.equipment</li>
+                                <li class="list-group-item"><b>Target :</b> @obj.target</li>
+                            </ul>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        <div id="Push" class="Push">
+            <div class="jumbotron">
+                <h1 class="mb-4">Push Day</h1>
+                <a href="#top" id="but" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true" style="margin-left:2%;">Back to Top</a>
+                <br>
+                @foreach (var obj in Model.exercisesList)
+                {
+                    if (obj.plan == "Push Day")
+                    {
+                        <div class="card" style="width: 18rem; display:inline-block; margin:2%;">
+                            <img class="card-img-top" src="@obj.gifUrl" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">@obj.name</h5>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><b>Sets :</b> @obj.SetsPlan</li>
+                                <li class="list-group-item"><b>Equipment :</b> @obj.equipment</li>
+                                <li class="list-group-item"><b>Target :</b> @obj.target</li>
+                            </ul>
+                        </div>
+                    }
+                }
+
+            </div>
+
+        </div>
+        <div id="Pull" class="Pull">
+            <div class="jumbotron">
+                <h1 class="mb-4">Pull day</h1>
+                <a href="#top" id="but" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true" style="margin-left:2%;">Back to Top</a>
+                <br>
+                @foreach (var obj in Model.exercisesList)
+                {
+                    if (obj.plan == "Pull Day")
+                    {
+                        <div class="card" style="width: 18rem; display:inline-block; margin:2%;">
+                            <img class="card-img-top" src="@obj.gifUrl" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">@obj.name</h5>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><b>Sets :</b> @obj.SetsPlan</li>
+                                <li class="list-group-item"><b>Equipment :</b> @obj.equipment</li>
+                                <li class="list-group-item"><b>Target :</b> @obj.target</li>
+                            </ul>
+                        </div>
+                    }
+                }
+
+            </div>
+
+        </div>
+        <div id="legs" class="Legs">
+            <div class="jumbotron">
+                <h1 class="mb-4">Legs day</h1>
+                <a href="#top" id="but" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true" style="margin-left:2%;">Back to Top</a>
+                <br>
+                @foreach (var obj in Model.exercisesList)
+                {
+                    if (obj.plan == "Leg Day")
+                    {
+                        <div class="card" style="width: 18rem; display:inline-block; margin:2%;">
+                            <img class="card-img-top" src="@obj.gifUrl" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">@obj.name</h5>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><b>Sets :</b> @obj.SetsPlan</li>
+                                <li class="list-group-item"><b>Equipment :</b> @obj.equipment</li>
+                                <li class="list-group-item"><b>Target :</b> @obj.target</li>
+                            </ul>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        <div id="Chest" class="Chest">
+            <div class="jumbotron">
+                <h1 class="mb-4">Chest day</h1>
+                <a href="#top" id="but" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true" style="margin-left:2%;">Back to Top</a>
+                <br>
+                @foreach (var obj in Model.exercisesList)
+                {
+                    if (obj.plan == "Chest")
+                    {
+                        <div class="card" style="width: 18rem; display:inline-block; margin:2%;">
+                            <img class="card-img-top" src="@obj.gifUrl" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">@obj.name</h5>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><b>Sets :</b> @obj.SetsPlan</li>
+                                <li class="list-group-item"><b>Equipment :</b> @obj.equipment</li>
+                                <li class="list-group-item"><b>Target :</b> @obj.target</li>
+                            </ul>
+                        </div>
+                    }
+                }
+
+            </div>
+        </div>
+        <div id="Back" class="Back">
+            <div  class="jumbotron">
+                <h1  class="mb-4">Back day</h1>
+                <a href="#top" id="but" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true" style="margin-left:2%;">Back to Top</a>
+                <br>
+                @foreach (var obj in Model.exercisesList)
+                {
+                    if (obj.plan == "Back")
+                    {
+                        <div class="card" style="width: 18rem; display:inline-block; margin:2%;">
+                            <img class="card-img-top" src="@obj.gifUrl" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">@obj.name</h5>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><b>Sets :</b> @obj.SetsPlan</li>
+                                <li class="list-group-item"><b>Equipment :</b> @obj.equipment</li>
+                                <li class="list-group-item"><b>Target :</b> @obj.target</li>
+                            </ul>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        <div id="shoulders" class="Shoulders">
+            <div class="jumbotron">
+                <h1  class="mb-4">Shoulders Day</h1>
+                <a href="#top" id="but" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true" style="margin-left:2%;">Back to Top</a>
+                <br>
+                @foreach (var obj in Model.exercisesList)
+                {
+                    if (obj.plan == "Shoulder")
+                    {
+                        <div class="card" style="width: 18rem; display:inline-block; margin:2%;">
+                            <img class="card-img-top" src="@obj.gifUrl" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">@obj.name</h5>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><b>Sets :</b> @obj.SetsPlan</li>
+                                <li class="list-group-item"><b>Equipment :</b> @obj.equipment</li>
+                                <li class="list-group-item"><b>Target :</b> @obj.target</li>
+                            </ul>
+                        </div>
+                    }
+                }
+
+            </div>
+        </div>
+        <div id="abs" class="Abs">
+            <div class="jumbotron">
+                <h1  class="mb-4">Abs day</h1>
+                <a href="#top" id="but" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true" style="margin-left:2%;">Back to Top</a>
+                <br>
+                @foreach (var obj in Model.exercisesList)
+                {
+                    if (obj.plan == "abs")
+                    {
+                        <div class="card" style="width: 18rem; display:inline-block; margin:2%;">
+                            <img class="card-img-top" src="@obj.gifUrl" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">@obj.name</h5>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><b>Sets :</b> @obj.SetsPlan</li>
+                                <li class="list-group-item"><b>Equipment :</b> @obj.equipment</li>
+                                <li class="list-group-item"><b>Target :</b> @obj.target</li>
+                            </ul>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+}
+@section Scripts{
+    @{
+        <partial name="_NavBar" />
+    }
+}

@@ -19,9 +19,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "dumbbell"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0314.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685980157/0314_lqutb9.gif"
                 ,
                 Name = "dumbbell incline bench press"
+                ,
+                SetsPlan = "4 sets 8-12 reps"
                 ,
                 Target = "pectorals"
                 ,
@@ -37,9 +39,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "barbell"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0025.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685980739/0025_finwsl.gif"
                 ,
                 Name = "barbell bench press"
+                ,
+                SetsPlan = "4 sets 8-12 reps"
                 ,
                 Target = "pectorals"
                 ,
@@ -55,9 +59,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "dumbbell"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0383.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685980809/0383_k11egw.gif"
                 ,
                 Name = "dumbbell reverse fly"
+                ,
+                SetsPlan = "4 sets 8-12 reps"
                 ,
                 Target = "delts"
                 ,
@@ -73,9 +79,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "cable"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0150.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685980846/0150_dpfo7j.gif"
                 ,
                 Name = "cable bar lateral pulldown"
+                ,
+                SetsPlan = "4 sets 8-12 reps"
                 ,
                 Target = "lats"
                 ,
@@ -91,9 +99,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "dumbbell"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0294.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685980894/0294_sscjgz.gif"
                 ,
                 Name = "dumbbell biceps curl"
+                ,
+                SetsPlan = "3 sets 12-15 reps"
                 ,
                 Target = "biceps"
                 ,
@@ -109,9 +119,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "dumbbell"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0334.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685980944/0334_q1scij.gif"
                 ,
                 Name = "dumbbell lateral raise"
+                ,
+                SetsPlan = "3 sets 12-15 reps"
                 ,
                 Target = "delts"
                 ,
@@ -127,9 +139,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "barbell"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0043.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685980980/0043_xbxxun.gif"
                 ,
                 Name = "barbell full squat"
+                ,
+                SetsPlan = "4 sets 8-12 reps"
                 ,
                 Target = "glutes"
                 ,
@@ -145,9 +159,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "dumbbell"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0381.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685981053/0381_kcwons.gif"
                 ,
                 Name = "dumbbell rear lunge"
+                ,
+                SetsPlan = "4 sets 8-12 reps"
                 ,
                 Target = "glutes"
                 ,
@@ -163,9 +179,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "leverage machine"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0585.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685981263/0585_gid5b1.gif"
                 ,
                 Name = "lever leg extension"
+                ,
+                SetsPlan = "4 sets 8-12 reps"
                 ,
                 Target = "quads"
                 ,
@@ -181,9 +199,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "leverage machine"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0586.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685981263/0585_gid5b1.gif"
                 ,
                 Name = "lever lying leg curl"
+                ,
+                SetsPlan = "3 sets 12-15 reps"
                 ,
                 Target = "hamstrings"
                 ,
@@ -195,17 +215,39 @@ namespace BeFit_API.Migrations
             {
                 Id = Guid.Parse("6c6d6f81-eb16-42aa-84ed-f38ff0827aae")
                 ,
+                BodyPart = "lower legs"
+                ,
+                Equipment = "body weight"
+                ,
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685981364/1373_lcwmcc.gif"
+                ,
+                Name = "bodyweight standing calf raise"
+                ,
+                SetsPlan = "3 sets 12-15 reps"
+                ,
+                Target = "calves"
+                ,
+                Plan = "Lower Body"
+                ,
+                IsActive = true
+            });
+            Insert.IntoTable(tableName: "Exercise").Row(new
+            {
+                Id = Guid.Parse("3da535de-5cfd-4a21-9255-60779c7dc127")
+                ,
                 BodyPart = "chest"
                 ,
                 Equipment = "dumbbell"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0314.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685980157/0314_lqutb9.gif"
                 ,
                 Name = "dumbbell incline bench press"
                 ,
+                SetsPlan = "4 sets 8-12 reps"
+                ,
                 Target = "pectorals"
                 ,
-                Plan = "Lower Body"
+                Plan = "Push Day"
                 ,
                 IsActive = true
             });
@@ -217,9 +259,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "barbell"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/1456.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685981434/1456_gy3ago.gif"
                 ,
                 Name = "barbell standing close grip military press"
+                ,
+                SetsPlan = "4 sets 8-12 reps"
                 ,
                 Target = "delts"
                 ,
@@ -235,9 +279,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "dumbbell"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0334.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685980944/0334_q1scij.gif"
                 ,
                 Name = "dumbbell lateral raise"
+                ,
+                SetsPlan = "4 sets 8-12 reps"
                 ,
                 Target = "delts"
                 ,
@@ -253,9 +299,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "leverage machine"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0596.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685981514/0596_s0ehiw.gif"
                 ,
                 Name = "lever seated fly"
+                ,
+                SetsPlan = "4 sets 8-12 reps"
                 ,
                 Target = "pectorals"
                 ,
@@ -271,9 +319,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "cable"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0149.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685981561/0149_blmulx.gif"
                 ,
                 Name = "cable alternate triceps extension"
+                ,
+                SetsPlan = "3 sets 12-15 reps"
                 ,
                 Target = "triceps"
                 ,
@@ -289,9 +339,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "cable"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0194.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685981604/0194_kcrzto.gif"
                 ,
                 Name = "cable overhead triceps extension (rope attachment)"
+                ,
+                SetsPlan = "3 sets 12-15 reps"
                 ,
                 Target = "triceps"
                 ,
@@ -307,9 +359,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "cable"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0150.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685980846/0150_dpfo7j.gif"
                 ,
                 Name = "cable bar lateral pulldown"
+                ,
+                SetsPlan = "4 sets 8-12 reps"
                 ,
                 Target = "lats"
                 ,
@@ -325,9 +379,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "barbell"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0027.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685981675/0027_dlbqir.gif"
                 ,
                 Name = "barbell bent over row"
+                ,
+                SetsPlan = "4 sets 8-12 reps"
                 ,
                 Target = "upper back"
                 ,
@@ -343,9 +399,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "cable"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/1320.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685981716/1320_c71gta.gif"
                 ,
                 Name = "cable rope crossover seated row"
+                ,
+                SetsPlan = "4 sets 8-12 reps"
                 ,
                 Target = "upper back"
                 ,
@@ -361,9 +419,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "leverage machine"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0602.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685981752/0602_r2stjh.gif"
                 ,
                 Name = "lever seated reverse fly"
+                ,
+                SetsPlan = "4 sets 8-12 reps"
                 ,
                 Target = "delts"
                 ,
@@ -379,9 +439,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "dumbbell"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0294.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685982384/0294_gz3wpg.gif"
                 ,
                 Name = "dumbbell biceps curl"
+                ,
+                SetsPlan = "3 sets 12-15 reps"
                 ,
                 Target = "biceps"
                 ,
@@ -397,9 +459,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "dumbbell"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0298.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685982449/0298_ei3nnp.gif"
                 ,
                 Name = "dumbbell cross body hammer curl"
+                ,
+                SetsPlan = "3 sets 12-15 reps"
                 ,
                 Target = "biceps"
                 ,
@@ -415,9 +479,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "barbell"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0043.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685980980/0043_xbxxun.gif"
                 ,
                 Name = "barbell full squat"
+                ,
+                SetsPlan = "4 sets 8-12 reps"
                 ,
                 Target = "glutes"
                 ,
@@ -433,9 +499,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "dumbbell"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0381.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685981053/0381_kcwons.gif"
                 ,
                 Name = "dumbbell rear lunge"
+                ,
+                SetsPlan = "4 sets 8-12 reps"
                 ,
                 Target = "glutes"
                 ,
@@ -451,9 +519,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "leverage machine"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0585.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685981263/0585_gid5b1.gif"
                 ,
                 Name = "lever leg extension"
+                ,
+                SetsPlan = "4 sets 8-12 reps"
                 ,
                 Target = "quads"
                 ,
@@ -469,9 +539,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "leverage machine"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0586.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685981310/0586_noertv.gif"
                 ,
                 Name = "lever lying leg curl"
+                ,
+                SetsPlan = "4 sets 8-12 reps"
                 ,
                 Target = "hamstrings"
                 ,
@@ -481,17 +553,19 @@ namespace BeFit_API.Migrations
             });
             Insert.IntoTable(tableName: "Exercise").Row(new
             {
-                Id = Guid.Parse("61ba9dea-4f3d-4553-907c-d1e885f8527d")
+                Id = Guid.Parse("2d0f0385-2bb0-40ea-8d6e-b64b6b4baaec")
                 ,
-                BodyPart = "chest"
+                BodyPart = "lower legs"
                 ,
-                Equipment = "dumbbell"
+                Equipment = "body weight"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0314.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685981364/1373_lcwmcc.gif"
                 ,
-                Name = "dumbbell incline bench press"
+                Name = "bodyweight standing calf raise"
                 ,
-                Target = "pectorals"
+                SetsPlan = "4 sets 8-12 reps"
+                ,
+                Target = "calves"
                 ,
                 Plan = "Leg Day"
                 ,
@@ -505,9 +579,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "sled machine"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0739.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685982692/0739_ctgjar.gif"
                 ,
                 Name = "sled 45в° leg press"
+                ,
+                SetsPlan = "3 sets 12-15 reps"
                 ,
                 Target = "glutes"
                 ,
@@ -523,9 +599,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "barbell"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0032.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685982758/0032_iz3lo5.gif"
                 ,
                 Name = "barbell deadlift"
+                ,
+                SetsPlan = "3 sets 12-15 reps"
                 ,
                 Target = "glutes"
                 ,
@@ -541,9 +619,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "dumbbell"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0314.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685980157/0314_lqutb9.gif"
                 ,
                 Name = "dumbbell incline bench press"
+                ,
+                SetsPlan = "4 sets 8-12 reps"
                 ,
                 Target = "pectorals"
                 ,
@@ -559,9 +639,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "barbell"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0025.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685980739/0025_finwsl.gif"
                 ,
                 Name = "barbell bench press"
+                ,
+                SetsPlan = "4 sets 8-12 reps"
                 ,
                 Target = "pectorals"
                 ,
@@ -577,9 +659,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "leverage machine"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0596.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685981514/0596_s0ehiw.gif"
                 ,
                 Name = "lever seated fly"
+                ,
+                SetsPlan = "3 sets 12-15 reps"
                 ,
                 Target = "pectorals"
                 ,
@@ -595,9 +679,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "body weight"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0251.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685982895/0251_rmnyew.gif"
                 ,
                 Name = "chest dip"
+                ,
+                SetsPlan = "3 sets 12-15 reps"
                 ,
                 Target = "pectorals"
                 ,
@@ -613,9 +699,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "cable"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0150.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685980846/0150_dpfo7j.gif"
                 ,
                 Name = "cable bar lateral pulldown"
+                ,
+                SetsPlan = "4 sets 8-12 reps"
                 ,
                 Target = "lats"
                 ,
@@ -631,9 +719,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "barbell"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0027.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685983001/0027_rxfrqh.gif"
                 ,
                 Name = "barbell bent over row"
+                ,
+                SetsPlan = "4 sets 8-12 reps"
                 ,
                 Target = "upper back"
                 ,
@@ -649,9 +739,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "dumbbell"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0293.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685983055/0293_yx5xy4.gif"
                 ,
                 Name = "dumbbell bent over row"
+                ,
+                SetsPlan = "3 sets 12-15 reps"
                 ,
                 Target = "upper back"
                 ,
@@ -667,9 +759,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "cable"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0180.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685983100/0180_rpldls.gif"
                 ,
                 Name = "cable low seated row"
+                ,
+                SetsPlan = "3 sets 12-15 reps"
                 ,
                 Target = "upper back"
                 ,
@@ -685,9 +779,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "body weight"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0003.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685983142/0003_myvuti.gif"
                 ,
                 Name = "air bike"
+                ,
+                SetsPlan = "4 sets 30 reps"
                 ,
                 Target = "abs"
                 ,
@@ -703,9 +799,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "assisted"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0013.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685983174/0013_hsrks6.gif"
                 ,
                 Name = "assisted lying leg raise with throw down"
+                ,
+                SetsPlan = "4 sets 30 reps"
                 ,
                 Target = "abs"
                 ,
@@ -721,9 +819,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "barbell"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/1456.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685981434/1456_gy3ago.gif"
                 ,
                 Name = "barbell standing close grip military press"
+                ,
+                SetsPlan = "4 sets 8-12 reps"
                 ,
                 Target = "delts"
                 ,
@@ -739,9 +839,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "dumbbell"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0334.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685980944/0334_q1scij.gif"
                 ,
                 Name = "dumbbell lateral raise"
+                ,
+                SetsPlan = "4 sets 8-12 reps"
                 ,
                 Target = "delts"
                 ,
@@ -757,9 +859,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "dumbbell"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0310.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685983338/0310_mv8xl1.gif"
                 ,
                 Name = "dumbbell front raise"
+                ,
+                SetsPlan = "4 sets 8-12 reps"
                 ,
                 Target = "delts"
                 ,
@@ -775,9 +879,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "dumbbell"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0437.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685983402/0437_mglwlx.gif"
                 ,
                 Name = "dumbbell upright row"
+                ,
+                SetsPlan = "3 sets 12-15 reps"
                 ,
                 Target = "delts"
                 ,
@@ -793,9 +899,11 @@ namespace BeFit_API.Migrations
                 ,
                 Equipment = "dumbbell"
                 ,
-                GifUrl = "http://d205bpvrqc9yn1.cloudfront.net/0406.gif"
+                GifUrl = "https://res.cloudinary.com/dxx6cjnjj/image/upload/v1685983559/0406_qm5vtz.gif"
                 ,
                 Name = "dumbbell shrug"
+                ,
+                SetsPlan = "3 sets 12-15 reps"
                 ,
                 Target = "traps"
                 ,

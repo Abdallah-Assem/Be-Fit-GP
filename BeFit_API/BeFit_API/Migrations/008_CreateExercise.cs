@@ -18,6 +18,7 @@ namespace BeFit_API.Migrations
                 .WithColumn("Equipment").AsString().NotNullable()
                 .WithColumn("GifUrl").AsString().NotNullable()
                 .WithColumn("Name").AsString().NotNullable()
+                .WithColumn("SetsPlan").AsString().NotNullable()
                 .WithColumn("Target").AsString().NotNullable()
                 .WithColumn("Plan").AsString().NotNullable()
                 .WithColumn("IsActive").AsBoolean().NotNullable();
