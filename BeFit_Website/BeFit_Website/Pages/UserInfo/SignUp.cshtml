@@ -71,13 +71,13 @@
                 <div class="Sign-Up-form">
 			    <h1 class="Sign-Up-Header">Sign Up</h1>
                     <div class="social-container">
-                        <img src="~/photos/be-fit5.png" width="80" draggable="false" />
+                        <img src="~/photos/be-fit16.png" width="80" draggable="false" />
 		             </div>
                     <input asp-for="User_UserMacros.CombinedUser.UserName" type="text" placeholder="User Name" id="username"/>
                     <span asp-validation-for="User_UserMacros.CombinedUser.UserName" class="text-danger" style="color:#aa0909"></span>
                     <input asp-for="User_UserMacros.CombinedUser.Email" type="email"   placeholder="Email" id="email"/>
                     <span asp-validation-for="User_UserMacros.CombinedUser.Email" class="text-danger" style="color:#aa0909"></span>
-                    <input asp-for="User_UserMacros.CombinedUser.Password" type="password"  placeholder="Password" id="password"/>
+                    <input asp-for="User_UserMacros.CombinedUser.Password" type="password" placeholder="Password" id="password" minlength="8" />
                     <span asp-validation-for="User_UserMacros.CombinedUser.Password" class="text-danger" style="color:#aa0909"></span>
                 </div>
             </div>
