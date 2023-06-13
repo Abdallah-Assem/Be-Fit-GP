@@ -1,0 +1,118 @@
+﻿body {
+    background: #e6e6e6;
+}
+.navbar {
+    background: linear-gradient(to top, #106da2, #2b32b2);
+}
+.calorieContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+}
+form {
+    display: inline;
+}
+.carbContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 3%;
+    width: 50%;
+}
+.calorieName {
+    margin-bottom: 9px;
+    margin-right: 35%;
+    font-weight: bolder;
+    font-size: 20px;
+}
+.calorieInfo {
+    margin-bottom: 9px;
+    margin-right: 40%;
+    font-size: 15px;
+}
+.barName {
+    margin-bottom: 3px;
+    margin-right: 40%;
+    font-weight: bolder;
+    font-size: 15px;
+}
+.barInfo {
+    margin-bottom: 9px;
+    margin-right: 45%;
+    font-size: 10px;
+}
+
+.caloriesBarContainer {
+    width: 50%;
+    height: 30px;
+    position: center;
+    margin: auto;
+    margin-bottom:40px;
+    border-radius: 20px;
+}
+    .caloriesBarContainer .progress-bar {
+        border-radius: 20px;
+        font-weight: bold;
+        color: black;
+    }
+
+.otherBarsContainer {
+    display: flex;
+}
+    .otherBarsContainer .progress {
+        margin-left: 2%;
+        margin-right: 2%;
+        width: 66%;
+        height: 30px;
+        border-radius: 20px;
+    }
+    .otherBarsContainer .progress-bar {
+        border-radius: 20px;
+        font-weight: bold;
+        color: black;
+    }
+.custom-card {
+    width: 250px;
+    height: 350px;
+    font-size: 24px;
+    margin: 10px;
+}
+
+.card-title {
+    color: #FFFFFF;
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+.card-deck {
+    margin-top: 80px;
+    margin: 10px;
+}
+
+.list-group-item {
+    font-size: 15px;
+}
+
+.delete-item {
+    color: red;
+    float: right;
+    margin-top: 0px;
+}
+
+.calories-count {
+    position: absolute;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+
+.header {
+    background: linear-gradient(to top, #1488cc, #2b32b2);
+    display: flex;
+}

@@ -1,0 +1,116 @@
+.table-container {
+  margin: 0 auto;
+  width: 80%;
+}
+
+body {
+  margin-top: 70px;
+  margin-left: 120px;
+  padding: 0;
+}
+
+table {
+  margin-top: 50px;
+  margin-left: 50px;
+  width: 100%;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #ebebeb;
+}
+
+.username-cell,
+.email-cell {
+  font-weight: bold;
+}
+
+.email-cell {
+  text-align: left;
+}
+.userImg {
+    max-width: 80%;
+    height: auto;
+    border-radius: 20%;
+    object-fit: cover;
+    object-position: center;
+}
+    .userImg:hover {
+        transform: scale(2.3);
+    }
+
+.profile-picture-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+}
+
+.profile-picture-cell span {
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.profile-picture-cell img {
+  display: block;
+  margin: 0 auto;
+}
+
+.delete,
+.restore {
+  background-color: #dc3545;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.delete:hover,
+.restore:hover {
+  background-color: #c82333;
+}
+
+.restore {
+  background-color: #007bff;
+}
+
+.restore:hover {
+  background-color: #0069d9;
+}
+
+
+
+h1 {
+    background: -webkit-linear-gradient( #1488cc, #2b32b2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: left;
+    margin: 70px 20px 500px 20px;
+    font-weight: bolder;
+}
+
+.navbar-nav {
+  margin-right: auto;
+  margin-left: 0;
+}
+
+.navbar-brand img {
+  margin-right: 20px; 
+}
+
+.nav-link {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}

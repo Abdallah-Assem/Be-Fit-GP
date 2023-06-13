@@ -15,7 +15,7 @@
                             <p id="datetime"></p>
                         </div>
                     </div>
-                    <input asp-for="Feedback.Message" placeholder="your feedback is important to us 💖" required>
+                    <input id="yourInputFieldId" asp-for="Feedback.Message" placeholder="your feedback is important to us 💖" value="" required>
                     <button type="submit" asp-page-handler="AddFeedback" id="post-button" class="Post-button">Post</button>
                 </form>
         </div>

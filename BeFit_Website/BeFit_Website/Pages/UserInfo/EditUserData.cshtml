@@ -88,7 +88,7 @@
                             <div class="input-group-prepend">
                                     <span class="input-group-text">&#64;</span>
                             </div>
-                            <input type="text" class="BtnBtnV2" id="Email" placeholder="Email" asp-for="user.Email" required>
+                            <input type="email" class="BtnBtnV2" id="Email" placeholder="Email" asp-for="user.Email" required>
                             <div class="invalid-feedback" style="width: 100%;">
                             Your Email is required.
                             </div>
@@ -99,7 +99,7 @@
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                 </div>
-                                <input type="password" class="BtnBtn" id="Password" placeholder="Password" asp-for="user.Password" required>
+                                <input type="password" class="BtnBtn" id="Password" placeholder="Password" asp-for="user.Password" minlength="8" required>
                                 <div class="invalid-feedback" style="width: 100%;">
                                 Your Password is required.
                                 </div>

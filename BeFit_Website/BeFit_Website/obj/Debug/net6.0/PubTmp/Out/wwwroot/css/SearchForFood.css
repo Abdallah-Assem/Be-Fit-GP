@@ -1,0 +1,154 @@
+﻿nav {
+    background: linear-gradient(to bottom, #1488cc, #2b32b2);
+}
+
+.foorm2 {
+    width: 40%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+.head {
+    background: -webkit-linear-gradient( #1488cc, #2b32b2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.form-inline {
+    padding-left: 450px;
+}
+
+#search {
+    background: linear-gradient(to left, #1488cc, #2b32b2);
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+#searchBtn {
+    background: linear-gradient(to top, #1488cc, #2b32b2);
+    color: white;
+    margin-bottom: 2%;
+    margin-left: 1%;
+}
+
+#addBtn {
+    background: linear-gradient(to top, #1488cc, #2b32b2);
+    color: white;
+    margin-top: 1%;
+    margin-left: 50%;
+    margin-right: 50%;
+}
+
+
+.btn-sm {
+    text-align: center;
+    background: linear-gradient(to top, #1488cc, #2b32b2);
+}
+
+.special {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.Quantity {
+    text-align: center;
+    color: #1d97bf;
+}
+
+.Weight {
+    text-align: center;
+    color: #1d97bf;
+    padding-right: 10px;
+}
+
+
+#SaveBtn {
+    background: linear-gradient(to left, #1488cc, #2b32b2);
+}
+
+.dropdown2 {
+    margin-left: 130px;
+    color: #1d97bf;
+}
+
+#display {
+    font-weight: bold;
+    color: #2b32b2;
+}
+
+#modalCONT {
+    font-style: italic;
+    font-weight: bold;
+}
+
+#SaveBtn {
+    background: linear-gradient(to left, #1488cc, #2b32b2);
+}
+
+
+#jumbotron {
+    margin-top: 90px;
+}
+
+
+.rtable {
+    display: inline-block;
+    vertical-align: top;
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: normal;
+    border-collapse: separate;
+    border-spacing: 3px;
+}
+
+
+    .rtable th {
+        font-size: 15px;
+        text-align: center;
+        text-transform: uppercase;
+        background: linear-gradient(to top, #1488cc, #2b32b2);
+        color: white;
+    }
+
+    .rtable th,
+    .rtable td {
+        padding: 10px 100px;
+        border: 1px solid black;
+    }
+
+
+.rtable--flip th:not(:last-child),
+.rtable--flip td:not(:last-child) {
+    border-bottom: 0;
+}
+
+
+.mtable {
+    margin-top: 20px;
+    text-align: center;
+    color: black;
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 500;
+}
+
+body {
+    padding: 25px;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+h1, h2, h3 {
+    margin: 0 0 10px 0;
+    color:   #1d97bf;
+}

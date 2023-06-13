@@ -1,0 +1,84 @@
+
+
+.feedback-container {
+    width: 800px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow:inset 0 12px 28px rgba(0, 0, 0, 0.12);
+   /* border: 0.02px solid #212529;*/
+    margin: auto;
+    margin-top:5px;
+}
+.head {
+    background: -webkit-linear-gradient( #1488cc, #2b32b2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.feedback-post header {
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
+    padding: 17px 0;
+    border-bottom: 1px solid #bfbfbf;
+}
+
+.feedback-post form {
+    margin: 20px 25px;
+}
+
+    .feedback-post form .feedback-content {
+        display: flex;
+        align-items: center;
+    }
+
+        .feedback-post form .feedback-content img {
+            max-width: 52px;
+        }
+
+        .feedback-post form .feedback-content .feedback-details {
+            margin: -3px 0 0 12px;
+        }
+
+.feedback-form :where(input, button) {
+    width: 100%;
+    outline: none;
+    border: none;
+}
+
+.feedback-form input {
+    resize: none;
+    font-size: 18px;
+    margin-top: 5px;
+    min-height: 100px;
+}
+
+.delete {
+    width: 10%;
+    float: right;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+}
+    .delete:hover {
+        background: #792020;
+    }
+
+.feedback-form .Post-button {
+    height: 53px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    color: #BCC0C4;
+    border-radius: 7px;
+    background: #e2e5e9;
+    transition: all 0.3s ease;
+}
+
+.feedback-form .Post-button {
+    color: #fff;
+    background: linear-gradient(to top, #1488cc, #2b32b2);
+}
+
+    .feedback-form .Post-button:hover {
+        background: linear-gradient(to top, #2b32b2, #1488cc)
+    }

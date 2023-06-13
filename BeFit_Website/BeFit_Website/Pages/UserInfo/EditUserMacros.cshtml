@@ -85,7 +85,29 @@
                               <option value="Extra">Extra Active (twice per day)</option>
                             </select>
                         </div>
-                    </div>
+                        @if (Model.userMacros.Disease == "None")
+                        {
+                            <div class="form-group col-md-4">
+                                        <label for="inputState">Disease</label>
+                                        <select id="inputState" class="form-control" asp-for="userMacros.Disease" required>
+                                            <!--<option selected>Activity level...</option>-->
+                                            <option value="" hidden>Disease...</option>
+                                            <option value="None">None</option>
+                                            <option value="Diabetes">Diabetes</option>
+                                            <option value="Blood Pressure">Blood Pressure</option>
+                                            <option value="Cholesterol">Cholesterol</option>
+                                        </select>
+                                </div>
+                                
+                            }
+                            else
+                            {
+                            <div class="form-group col-md-4">
+                                <label for="inputState">Disease</label>
+                                <input asp-for="userMacros.Disease" id="inputState" class="form-control" readonly="true">
+                            </div>
+                            }
+                        </div>
                     <div class="modal-footer">
                          <a asp-page="/UserInfo/EditUserData" class="btn btn-secondary" data-dismiss="modal">Back</a>
                             <button type="submit" id="SaveBtn" class="btn btn-primary" style="background:linear-gradient(to top, #1488cc, #2b32b2);">Save</button>

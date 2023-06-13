@@ -55,6 +55,7 @@ namespace BeFit_API.Controllers
             UserOldMacros.Age = userNewMacros.Age;
             UserOldMacros.ActivityLevel = userNewMacros.ActivityLevel;
             UserOldMacros.Goal = userNewMacros.Goal;
+            UserOldMacros.Disease = userNewMacros.Disease;
             CalcMacros calc = new CalcMacros();
             calc.Calculate(UserOldMacros);
             await _dbContext.SaveChangesAsync();
